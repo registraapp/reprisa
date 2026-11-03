@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan de sortie DORA : la réversibilité SaaS testée</title>
+<meta name="description" content="Stratégie de sortie DORA et plan de réversibilité SaaS : ce que l&#x27;éditeur doit documenter, comment tester un export complet et ce que contient le rapport.">
+<link rel="canonical" href="https://reprisa.fr/blog/plan-de-sortie-reversibilite-dora/">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Reprisa">
+<meta property="og:title" content="Plan de sortie DORA : documenter et tester la réversibilité d&#x27;un SaaS">
+<meta property="og:description" content="Stratégie de sortie DORA et plan de réversibilité SaaS : ce que l&#x27;éditeur doit documenter, comment tester un export complet et ce que contient le rapport.">
+<meta property="og:url" content="https://reprisa.fr/blog/plan-de-sortie-reversibilite-dora/">
+<meta property="article:published_time" content="2026-11-03">
+<meta property="article:modified_time" content="2026-11-03">
+<meta name="author" content="Amine">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F5F6F8;--ink:#13202E;--soft:#4F5D6C;--rule:#D2D8E0;--steel:#1F4E79;--steel-tint:#E3ECF5;--ok:#2D6A4F;--ok-tint:#E2F0E8;--warn:#8A5A00;--warn-tint:#F7EDD5;--bad:#9B2C2C;--bad-tint:#F6E1E1;--focus:#2C5FD9;--serif:"Newsreader",Georgia,serif;--sans:"Inter Tight",system-ui,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6}
+  :focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+  a{color:var(--ink)}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+  header .wrap{display:flex;flex-wrap:wrap;gap:10px 0;justify-content:space-between;align-items:baseline;padding:24px 20px;border-bottom:1px solid var(--rule)}
+  .brand{font-family:var(--serif);font-weight:600;font-size:26px;text-decoration:none;letter-spacing:-.01em}
+  .brand small{font-family:var(--sans);font-weight:400;font-size:14px;color:var(--soft);margin-left:10px}
+  header nav a{font-weight:500;text-decoration:none;border-bottom:2px solid var(--steel);margin-left:18px}
+  header nav a[aria-current="page"]{border-bottom-color:var(--ink)}
+  .hero{padding:40px 0 32px;max-width:800px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,4.4vw,46px);line-height:1.12;letter-spacing:-.015em;margin:0 0 18px;overflow-wrap:break-word}
+  .lede{font-size:19px;color:var(--soft);margin:0 0 20px;max-width:60ch}
+  .btn{display:inline-block;background:var(--steel);color:#fff;text-decoration:none;font-weight:600;padding:14px 22px;border-radius:4px;border:0;font:inherit;font-weight:600;cursor:pointer}
+  .btn:hover{background:#183d60}
+  .btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink);padding:12px 20px;margin-left:12px}
+  .card{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:24px}
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 8px;max-width:720px}
+  ol.steps li{counter-increment:s;position:relative;padding:0 0 22px 52px}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:34px;height:34px;border-radius:50%;border:2px solid var(--steel);display:grid;place-items:center;font-weight:600;color:var(--steel)}
+  ol.steps strong{display:block}
+  .fine{font-size:14px;color:var(--soft)}
+  footer{border-top:1px solid var(--rule);padding:30px 0 48px;color:var(--soft);font-size:14px}
+  /* guides */
+  .crumb{font-size:14px;color:var(--soft);padding-top:22px}
+  .crumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px}
+  .crumb li+li::before{content:"\203A";margin:0 6px;color:var(--soft)}
+  .crumb a{color:var(--soft)}
+  .meta{font-size:14px;color:var(--soft);margin:0}
+  .answer{background:var(--steel-tint);border:2px solid var(--steel);border-radius:6px;padding:20px 24px;max-width:760px;margin:0 0 8px}
+  .answer p{margin:0}
+  .prose{max-width:740px;padding-bottom:24px}
+  .prose h2{font-family:var(--serif);font-weight:600;font-size:clamp(25px,3.2vw,30px);line-height:1.2;margin:48px 0 12px;padding-top:28px;border-top:1px solid var(--rule)}
+  .prose h3{font-family:var(--serif);font-weight:600;font-size:21px;line-height:1.3;margin:28px 0 8px}
+  .prose p,.prose ul,.prose ol{margin:0 0 16px}
+  .prose ul,.prose ol:not(.steps){padding-left:22px}
+  .prose li{margin-bottom:6px}
+  .prose code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;background:#fff;border:1px solid var(--rule);border-radius:3px;padding:1px 5px;overflow-wrap:anywhere}
+  .prose pre{background:#13202E;color:#E8EDF3;border-radius:6px;padding:16px 18px;overflow-x:auto;font-size:14px;line-height:1.55;margin:0 0 18px}
+  .prose pre code{background:none;border:0;padding:0;color:inherit;font-size:inherit;overflow-wrap:normal}
+  .tbl{overflow-x:auto;margin:0 0 20px;border:1px solid var(--rule);border-radius:6px;background:#fff}
+  .tbl table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.5}
+  .tbl caption{text-align:left;font-size:14px;color:var(--soft);padding:12px 14px 0}
+  .tbl th,.tbl td{text-align:left;vertical-align:top;padding:11px 14px;border-bottom:1px solid var(--rule)}
+  .tbl thead th{background:var(--steel-tint);font-weight:600}
+  .tbl tr:last-child td{border-bottom:0}
+  ul.check{list-style:none;padding-left:0}
+  .prose ul.check{padding-left:0}
+  ul.check li{position:relative;padding-left:30px}
+  ul.check li::before{content:"";position:absolute;left:2px;top:.32em;width:16px;height:16px;border:2px solid var(--steel);border-radius:3px;background:#fff}
+  .cta{background:#fff;border:1px solid var(--rule);border-left:5px solid var(--steel);border-radius:0 6px 6px 0;padding:22px 26px;margin:32px 0 8px}
+  .cta p{margin:0 0 14px}
+  .note{background:var(--warn-tint);border-left:5px solid var(--warn);padding:14px 18px;border-radius:0 6px 6px 0;font-size:15px}
+  .faq details{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:14px 18px;margin-bottom:10px}
+  .faq summary{font-weight:600;cursor:pointer}
+  .faq details p{margin:10px 0 0}
+  .sources ol{padding-left:22px;font-size:15px}
+  .sources li{overflow-wrap:anywhere}
+  .related{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:0 0 16px}
+  .related a{display:block;background:#fff;border:1px solid var(--rule);border-radius:6px;padding:16px 18px;text-decoration:none}
+  .related a strong{display:block;font-family:var(--serif);font-size:19px;line-height:1.25;margin-bottom:4px}
+  .related a span{color:var(--soft);font-size:15px}
+  .guides{display:grid;gap:20px;max-width:800px;margin-bottom:40px}
+  .guides .card h2{font-family:var(--serif);font-size:24px;line-height:1.25;margin:0 0 8px}
+  .guides .card h2 a{text-decoration:none}
+  .guides .card p{margin:0 0 10px}
+  .tag{display:inline-block;font-size:13px;font-weight:600;color:var(--steel);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+  @media (max-width:860px){.related{grid-template-columns:1fr}.btn.ghost{margin-left:0;margin-top:10px}.hero{padding:32px 0 24px}}
+  @media (max-width:560px){header nav{width:100%}header nav a{margin:0 16px 0 0}.brand small{display:block;margin:2px 0 0}.answer,.cta{padding:18px}.tbl{overflow-x:visible}.tbl thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.tbl tr{display:block;border-bottom:1px solid var(--rule);padding:6px 0}.tbl tbody tr:last-child{border-bottom:0}.tbl td{display:block;border:0;padding:4px 14px}.tbl td::before{content:attr(data-label);display:block;font-size:12px;font-weight:600;color:var(--soft);text-transform:uppercase;letter-spacing:.04em}.tbl td:first-child{font-weight:600}.tbl table{font-size:15px}}
+</style>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "Plan de sortie DORA : documenter et tester la réversibilité d'un SaaS",
+ "description": "Stratégie de sortie DORA et plan de réversibilité SaaS : ce que l'éditeur doit documenter, comment tester un export complet et ce que contient le rapport.",
+ "inLanguage": "fr-FR",
+ "datePublished": "2026-11-03",
+ "dateModified": "2026-11-03",
+ "author": {
+  "@type": "Person",
+  "name": "Amine",
+  "jobTitle": "Ingénieur DevOps"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Reprisa",
+  "url": "https://reprisa.fr"
+ },
+ "mainEntityOfPage": {
+  "@type": "WebPage",
+  "@id": "https://reprisa.fr/blog/plan-de-sortie-reversibilite-dora/"
+ },
+ "url": "https://reprisa.fr/blog/plan-de-sortie-reversibilite-dora/"
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Accueil",
+   "item": "https://reprisa.fr/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Guides",
+   "item": "https://reprisa.fr/blog/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Plan de sortie et réversibilité DORA",
+   "item": "https://reprisa.fr/blog/plan-de-sortie-reversibilite-dora/"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "La stratégie de sortie DORA est-elle à la charge du fournisseur ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Non. Le règlement impose la stratégie et les plans de sortie à l'entité financière (article 28, paragraphe 8). Mais l'entité ne peut ni les écrire ni les tester sans vous : elle a besoin de connaître vos formats, vos délais et votre assistance, et le contrat doit prévoir une période de transition (article 30, paragraphe 3, point f)."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Quelle durée prévoir pour la période de transition ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "DORA ne fixe pas de durée : elle doit être adéquate et adaptée à la complexité du service. La seule base défendable est une durée déduite d'un exercice réel, en ajoutant le temps de migration de votre client. Si le Data Act s'applique à votre contrat, il impose ses propres plafonds, à faire vérifier par votre juriste."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Faut-il tester le plan de sortie chaque année ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Le règlement demande des plans « suffisamment testés » et réexaminés périodiquement, sans fixer de fréquence. En pratique, de nombreux établissements demandent un test daté de moins d'un an, ou un nouveau test après un changement important du produit ou de l'architecture."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Quel format d'export DORA impose-t-il ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Aucun format précis. L'article 30, paragraphe 2, point d, exige une restitution dans un format facilement accessible. Des formats ouverts et documentés, comme CSV ou JSON avec un schéma et un dictionnaire des champs, permettent de le démontrer."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Un exercice de sortie sur des données de test suffit-il ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Il prouve que la procédure fonctionne, mais pas qu'elle tient la volumétrie d'un client réel. Le plus convaincant est un jeu de données représentatif en volume et en diversité, ou l'export d'un client volontaire dans un environnement isolé."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Peut-on facturer l'assistance à la réversibilité ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "DORA impose que l'assistance en cas d'incident soit gratuite ou à coût fixé à l'avance. Pour la sortie, il ne fixe pas de prix, mais votre client doit pouvoir l'anticiper dans son plan. Le Data Act encadre par ailleurs les frais de changement de fournisseur et prévoit leur suppression à partir du 12 janvier 2027 : à vérifier pour vos contrats."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="brand" href="/">Reprisa<small>preuves de résilience DORA</small></a>
+  <nav aria-label="Navigation principale"><a href="/blog/">Guides</a><a href="/cra/">Cyber Resilience Act</a><a href="/#contact">Contact</a></nav>
+</div></header>
+
+<main class="wrap">
+  <nav class="crumb" aria-label="Fil d'Ariane"><ol><li><a href="/">Accueil</a></li><li><a href="/blog/">Guides</a></li><li aria-current="page">Plan de sortie et réversibilité DORA</li></ol></nav>
+  <article>
+  <div class="hero">
+    <h1>Plan de sortie DORA&nbsp;: documenter et tester la réversibilité d'un SaaS</h1>
+    <p class="lede">Votre client bancaire vous demande votre «&nbsp;exit strategy&nbsp;», votre plan de réversibilité ou la durée de votre période de transition. Voici ce que le règlement exige réellement, ce qui relève de votre client et ce qui relève de vous, et comment le prouver par un exercice.</p>
+    <p class="meta">Par Amine, ingénieur DevOps chez Reprisa · <time datetime="2026-11-03">Mis à jour le 3 novembre 2026</time></p>
+  </div>
+  <div class="answer"><p>Pour chaque service TIC qui soutient une fonction critique ou importante, DORA impose à l'entité financière une stratégie de sortie documentée, suffisamment testée et revue périodiquement (article 28, paragraphe 8), et un contrat qui prévoit une période de transition obligatoire (article 30, paragraphe 3, point f). L'éditeur SaaS n'écrit pas la stratégie de son client, mais il en fournit la matière&nbsp;: un export complet, des formats documentés, des délais mesurés et une assistance définie. La preuve la plus solide est un exercice de sortie réellement exécuté, avec un rapport daté.</p></div>
+  <div class="prose">
+
+  <h2 id="exigences">Ce que DORA exige exactement</h2>
+  <p>Quatre dispositions encadrent la sortie d'un prestataire TIC. Elles s'adressent à l'entité financière, mais chacune suppose une contribution de votre part.</p>
+  <ul>
+    <li><strong>Article 28, paragraphe 8.</strong> Pour les services soutenant des fonctions critiques ou importantes, l'entité doit avoir des stratégies de sortie qui tiennent compte d'une défaillance du prestataire, d'une dégradation du service, d'une perturbation ou d'une résiliation. La sortie doit pouvoir se faire sans perturber l'activité, sans dégrader la conformité réglementaire et sans nuire au service rendu aux clients. Les plans de sortie doivent être complets, documentés, <strong>suffisamment testés</strong> et réexaminés périodiquement. L'entité doit aussi identifier des solutions de remplacement et des plans de transition.</li>
+    <li><strong>Article 30, paragraphe 3, point f.</strong> Le contrat doit prévoir une période de transition adéquate et obligatoire, pendant laquelle le prestataire continue à fournir le service, le temps de migrer vers un autre prestataire ou vers une solution interne adaptée à la complexité du service.</li>
+    <li><strong>Article 30, paragraphe 2, point d.</strong> Pour tous les contrats, l'accès, la récupération et la restitution des données dans un format facilement accessible doivent être garantis, y compris en cas d'insolvabilité, d'arrêt d'activité ou de fin de contrat.</li>
+    <li><strong>Règlement délégué (UE) 2024/1773, article 10.</strong> La politique de l'entité doit prévoir un plan de sortie documenté pour chaque contrat concerné, testé et revu périodiquement. Il doit couvrir les interruptions imprévues et persistantes, une prestation défaillante et une résiliation inattendue. Il doit être réaliste, faisable, fondé sur des scénarios plausibles, et comporter un calendrier de mise en œuvre compatible avec les clauses de sortie du contrat.</li>
+  </ul>
+  <p>Le règlement ne fixe ni la durée de la période de transition, ni la fréquence des tests, ni un format de données. Ces points se négocient dans le contrat, et c'est précisément là que des chiffres mesurés vous donnent l'avantage.</p>
+  <p class="note">Le règlement (UE) 2023/2854 sur les données (Data Act) encadre aussi, depuis le 12 septembre 2025, le changement de fournisseur de services de traitement de données, dont le SaaS&nbsp;: préavis maximal, période de transition, suppression progressive des frais de changement. Ses articles 23 à 31 peuvent s'ajouter aux exigences DORA. Faites vérifier leur application à vos contrats par votre juriste.</p>
+
+  <h2 id="qui-fait-quoi">Stratégie de sortie, plan de sortie, réversibilité&nbsp;: qui fait quoi</h2>
+  <p>Les trois termes circulent indifféremment dans les questionnaires. Ils ne désignent pas la même chose, et ne relèvent pas de la même partie.</p>
+  <div class="tbl">
+  <table>
+    <caption>Répartition des rôles entre l'entité financière et l'éditeur SaaS</caption>
+    <thead><tr><th scope="col">Élément</th><th scope="col">Qui en est responsable</th><th scope="col">Ce que l'éditeur apporte</th></tr></thead>
+    <tbody>
+      <tr><td data-label="Élément">Stratégie de sortie</td><td data-label="Qui en est responsable">L'entité financière (article 28, paragraphe 8)</td><td data-label="Ce que l&#x27;éditeur apporte">Les informations pour évaluer la faisabilité et la durée d'une sortie</td></tr>
+      <tr><td data-label="Élément">Plan de sortie par contrat</td><td data-label="Qui en est responsable">L'entité financière (règlement délégué 2024/1773, article 10)</td><td data-label="Ce que l&#x27;éditeur apporte">Le déroulé technique de l'export et de la transition, avec des durées mesurées</td></tr>
+      <tr><td data-label="Élément">Clause de transition</td><td data-label="Qui en est responsable">Les deux parties, dans le contrat (article 30, paragraphe 3, point f)</td><td data-label="Ce que l&#x27;éditeur apporte">Une durée réaliste et le contenu précis de l'assistance</td></tr>
+      <tr><td data-label="Élément">Restitution des données</td><td data-label="Qui en est responsable">L'éditeur, au titre du contrat (article 30, paragraphe 2, point d)</td><td data-label="Ce que l&#x27;éditeur apporte">Une procédure d'export, des formats documentés, un export déjà réalisé</td></tr>
+      <tr><td data-label="Élément">Test de la sortie</td><td data-label="Qui en est responsable">L'entité doit tester son plan&nbsp;; elle a besoin de vous pour le faire</td><td data-label="Ce que l&#x27;éditeur apporte">Un exercice de sortie exécuté et un rapport daté</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2 id="documenter">Ce que l'éditeur doit documenter</h2>
+  <p>Un plan de réversibilité utile répond à une question simple&nbsp;: si le client part demain, que reçoit-il, sous quelle forme, en combien de temps, et avec quelle aide&nbsp;? La liste ci-dessous sert de trame.</p>
+  <ul class="check">
+    <li><strong>Périmètre des données.</strong> Données métier, pièces jointes et fichiers, historiques, journaux d'audit, paramétrage, utilisateurs et droits. Indiquez ce qui est exclu, et pourquoi.</li>
+    <li><strong>Formats.</strong> Par exemple CSV ou JSON pour les tables, fichiers d'origine pour les pièces jointes, dump SQL si pertinent. Joignez le schéma et un dictionnaire des champs&nbsp;: un export illisible sans votre code n'est pas une restitution.</li>
+    <li><strong>Canal de remise.</strong> API d'export, export en masse, dépôt sur un stockage objet ou un serveur SFTP du client.</li>
+    <li><strong>Intégrité et confidentialité.</strong> Chiffrement en transit, empreintes de contrôle (SHA-256) et comptages par table fournis avec l'export.</li>
+    <li><strong>Délais.</strong> Délai de mise à disposition de l'export complet, mesuré sur un volume réaliste, et durée proposée pour la période de transition.</li>
+    <li><strong>Assistance de transition.</strong> Ce qui est inclus (exports intermédiaires, réponses techniques, maintien du service), son coût, fixé à l'avance, et l'interlocuteur.</li>
+    <li><strong>Sous-traitants concernés.</strong> Les fournisseurs qui détiennent une partie des données, sauvegardes comprises, et la façon dont leurs copies sont restituées ou supprimées.</li>
+    <li><strong>Suppression.</strong> Délai de suppression après la fin de la transition, sauvegardes incluses, et attestation remise au client.</li>
+  </ul>
+
+  <h2 id="exercice">Conduire un exercice de sortie</h2>
+  <p>Un plan non testé reste une hypothèse. L'exercice consiste à exécuter la sortie pour de vrai, sur des données représentatives, sans toucher à la production du client.</p>
+  <ol class="steps">
+    <li><strong>Choisir le périmètre.</strong> Un client volontaire ou un environnement qui reproduit un client réel en volume et en diversité de données. Fixez à l'avance les critères de réussite&nbsp;: complétude, exploitabilité, durée.</li>
+    <li><strong>Déclencher l'export par le canal prévu au contrat.</strong> Pas par une requête ad hoc d'un développeur. Chronométrez de la demande à la mise à disposition.</li>
+    <li><strong>Vérifier la complétude.</strong> Comparez les comptages par table et par type d'objet entre la source et l'export, contrôlez les pièces jointes et les empreintes.</li>
+    <li><strong>Vérifier l'exploitabilité.</strong> Réimportez l'export dans un environnement neutre, par exemple une base PostgreSQL vierge, à l'aide de la seule documentation fournie. Si l'équipe qui réimporte a besoin de poser des questions, notez-les&nbsp;: ce sont des manques de la documentation.</li>
+    <li><strong>Mesurer et consigner les écarts.</strong> Durées réelles, volumes, anomalies, données manquantes ou mal formées, corrections apportées en cours d'exercice.</li>
+    <li><strong>Tester la suppression, si le périmètre le permet.</strong> Sur un environnement de test, vérifiez que les données disparaissent aussi des sauvegardes au terme du délai annoncé.</li>
+  </ol>
+
+  <h2 id="rapport">Ce que contient le rapport d'exercice</h2>
+  <p>Le rapport est la pièce que votre client joindra à son propre dossier. Il doit être lisible par un responsable des risques qui n'a pas assisté à l'exercice.</p>
+  <div class="tbl">
+  <table>
+    <caption>Contenu type d'un rapport d'exercice de sortie</caption>
+    <thead><tr><th scope="col">Rubrique</th><th scope="col">Contenu</th></tr></thead>
+    <tbody>
+      <tr><td data-label="Rubrique">Identification</td><td data-label="Contenu">Date, version du service, environnement, participants, référence du contrat ou du plan de sortie testé</td></tr>
+      <tr><td data-label="Rubrique">Périmètre</td><td data-label="Contenu">Données incluses et exclues, volume en lignes, fichiers et gigaoctets</td></tr>
+      <tr><td data-label="Rubrique">Déroulé</td><td data-label="Contenu">Étapes horodatées, du déclenchement à la remise</td></tr>
+      <tr><td data-label="Rubrique">Résultats mesurés</td><td data-label="Contenu">Durée de l'export, durée du réimport, taux de complétude par table, empreintes vérifiées</td></tr>
+      <tr><td data-label="Rubrique">Écarts</td><td data-label="Contenu">Anomalies constatées, gravité, correction apportée ou date prévue</td></tr>
+      <tr><td data-label="Rubrique">Conclusion</td><td data-label="Contenu">Critères de réussite atteints ou non, durée de transition réaliste qui en découle</td></tr>
+      <tr><td data-label="Rubrique">Annexes</td><td data-label="Contenu">Schéma des données, dictionnaire, extraits de journaux, procédure utilisée</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2 id="erreurs">Les erreurs les plus fréquentes</h2>
+  <ul>
+    <li>Une clause de réversibilité qui renvoie à «&nbsp;un export dans un format standard&nbsp;» sans jamais avoir produit cet export.</li>
+    <li>Un export qui contient les tables mais pas les pièces jointes, ou l'inverse.</li>
+    <li>Une période de transition fixée au hasard, plus courte que le temps réellement nécessaire pour exporter et vérifier les données.</li>
+    <li>Des copies de données oubliées chez un sous-traitant ou dans les sauvegardes.</li>
+    <li>Un exercice réalisé une fois, il y a trois ans, sur une version du produit qui n'existe plus.</li>
+  </ul>
+  <p>La sortie est souvent la question qui bloque un questionnaire DORA. Notre guide sur le <a href="/blog/questionnaire-dora-fournisseur/">questionnaire DORA fournisseur</a> recense les autres questions types et la preuve qui répond à chacune.</p>
+
+  <div class="cta">
+    <p><strong>Un exercice de sortie, exécuté et documenté pour vous.</strong> L'offre Complet de Reprisa (4&nbsp;900&nbsp;€ HT) comprend l'export complet et vérifié des données d'un client, le test de restauration et les réponses rédigées au questionnaire de votre client. Le re-test annuel (1&nbsp;500&nbsp;€ HT) rejoue l'exercice chaque année.</p>
+    <a class="btn" href="/#offre">Voir l'offre DORA</a>
+  </div>
+
+  <h2 id="faq">Questions fréquentes</h2>
+  <div class="faq">
+    <details><summary>La stratégie de sortie DORA est-elle à la charge du fournisseur&nbsp;?</summary><p>Non. Le règlement impose la stratégie et les plans de sortie à l'entité financière (article 28, paragraphe 8). Mais l'entité ne peut ni les écrire ni les tester sans vous&nbsp;: elle a besoin de connaître vos formats, vos délais et votre assistance, et le contrat doit prévoir une période de transition (article 30, paragraphe 3, point f).</p></details>
+    <details><summary>Quelle durée prévoir pour la période de transition&nbsp;?</summary><p>DORA ne fixe pas de durée&nbsp;: elle doit être adéquate et adaptée à la complexité du service. La seule base défendable est une durée déduite d'un exercice réel, en ajoutant le temps de migration de votre client. Si le Data Act s'applique à votre contrat, il impose ses propres plafonds, à faire vérifier par votre juriste.</p></details>
+    <details><summary>Faut-il tester le plan de sortie chaque année&nbsp;?</summary><p>Le règlement demande des plans «&nbsp;suffisamment testés&nbsp;» et réexaminés périodiquement, sans fixer de fréquence. En pratique, de nombreux établissements demandent un test daté de moins d'un an, ou un nouveau test après un changement important du produit ou de l'architecture.</p></details>
+    <details><summary>Quel format d'export DORA impose-t-il&nbsp;?</summary><p>Aucun format précis. L'article 30, paragraphe 2, point d, exige une restitution dans un format facilement accessible. Des formats ouverts et documentés, comme CSV ou JSON avec un schéma et un dictionnaire des champs, permettent de le démontrer.</p></details>
+    <details><summary>Un exercice de sortie sur des données de test suffit-il&nbsp;?</summary><p>Il prouve que la procédure fonctionne, mais pas qu'elle tient la volumétrie d'un client réel. Le plus convaincant est un jeu de données représentatif en volume et en diversité, ou l'export d'un client volontaire dans un environnement isolé.</p></details>
+    <details><summary>Peut-on facturer l'assistance à la réversibilité&nbsp;?</summary><p>DORA impose que l'assistance en cas d'incident soit gratuite ou à coût fixé à l'avance. Pour la sortie, il ne fixe pas de prix, mais votre client doit pouvoir l'anticiper dans son plan. Le Data Act encadre par ailleurs les frais de changement de fournisseur et prévoit leur suppression à partir du 12 janvier 2027&nbsp;: à vérifier pour vos contrats.</p></details>
+  </div>
+
+  <h2 id="sources">Sources</h2>
+  <div class="sources">
+  <ol>
+    <li><a href="https://eur-lex.europa.eu/eli/reg/2022/2554/oj" rel="noopener">Règlement (UE) 2022/2554 (DORA), articles 28 et 30</a> — EUR-Lex, Journal officiel L 333 du 27.12.2022.</li>
+    <li><a href="https://eur-lex.europa.eu/eli/reg_del/2024/1773/oj" rel="noopener">Règlement délégué (UE) 2024/1773, article 10 — sortie et résiliation des accords contractuels</a> — EUR-Lex.</li>
+    <li><a href="https://eur-lex.europa.eu/eli/reg/2023/2854/oj" rel="noopener">Règlement (UE) 2023/2854 (Data Act), chapitre VI — changement de services de traitement de données</a> — EUR-Lex.</li>
+    <li><a href="https://acpr.banque-france.fr/system/files/2026-03/20260320_FAQ_webinaire_DORA_du_23-01-2026.pdf" rel="noopener">ACPR — FAQ du webinaire DORA du 23 janvier 2026</a> — publiée le 20 mars 2026.</li>
+  </ol>
+  <p class="fine">Textes consultés le 3 novembre 2026. En cas de divergence, seule la version publiée au Journal officiel de l'Union européenne fait foi.</p>
+  </div>
+
+  <h2>À lire aussi</h2>
+  <div class="related">
+    <a href="/blog/questionnaire-dora-fournisseur/"><strong>Questionnaire DORA fournisseur&nbsp;: questions et preuves</strong><span>Les questions types des banques et la pièce qui répond à chacune.</span></a>
+    <a href="/blog/cra-signalement-vulnerabilite-24-heures/"><strong>CRA&nbsp;: signaler une vulnérabilité exploitée en 24&nbsp;heures</strong><span>Obligations du Cyber Resilience Act depuis le 11 septembre 2026.</span></a>
+    <a href="/#offre"><strong>L'offre Reprisa DORA</strong><span>Test de restauration, exercice de sortie, registre&nbsp;: à prix fixe.</span></a>
+  </div>
+  </div>
+  </article>
+</main>
+
+<footer><div class="wrap">
+  <p>Reprisa — <a href="/">preuves de résilience DORA</a> pour les fournisseurs informatiques du secteur financier et <a href="/cra/">mise en conformité technique au Cyber Resilience Act</a>. <a href="/blog/">Guides</a>. Contact&nbsp;: amine@reprisa.fr. Reprisa réalise des tests techniques et rédige des preuves&nbsp;; ce n'est ni un cabinet d'avocats ni un organisme notifié, et ces guides ne constituent pas un avis juridique.</p>
+</div></footer>
+</body>
+</html>

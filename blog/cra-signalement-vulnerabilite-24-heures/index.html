@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CRA : signaler une vulnérabilité exploitée en 24 heures</title>
+<meta name="description" content="Cyber Resilience Act : alerte sous 24 heures, notification sous 72 heures, rapport final, plateforme ENISA, CERT-FR, SBOM et sanctions. Procédure pratique.">
+<link rel="canonical" href="https://reprisa.fr/blog/cra-signalement-vulnerabilite-24-heures/">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Reprisa">
+<meta property="og:title" content="CRA : signaler une vulnérabilité exploitée en 24 heures, et préparer le SBOM de 2027">
+<meta property="og:description" content="Cyber Resilience Act : alerte sous 24 heures, notification sous 72 heures, rapport final, plateforme ENISA, CERT-FR, SBOM et sanctions. Procédure pratique.">
+<meta property="og:url" content="https://reprisa.fr/blog/cra-signalement-vulnerabilite-24-heures/">
+<meta property="article:published_time" content="2026-11-03">
+<meta property="article:modified_time" content="2026-11-03">
+<meta name="author" content="Amine">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F5F6F8;--ink:#13202E;--soft:#4F5D6C;--rule:#D2D8E0;--steel:#1F4E79;--steel-tint:#E3ECF5;--ok:#2D6A4F;--ok-tint:#E2F0E8;--warn:#8A5A00;--warn-tint:#F7EDD5;--bad:#9B2C2C;--bad-tint:#F6E1E1;--focus:#2C5FD9;--serif:"Newsreader",Georgia,serif;--sans:"Inter Tight",system-ui,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6}
+  :focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+  a{color:var(--ink)}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+  header .wrap{display:flex;flex-wrap:wrap;gap:10px 0;justify-content:space-between;align-items:baseline;padding:24px 20px;border-bottom:1px solid var(--rule)}
+  .brand{font-family:var(--serif);font-weight:600;font-size:26px;text-decoration:none;letter-spacing:-.01em}
+  .brand small{font-family:var(--sans);font-weight:400;font-size:14px;color:var(--soft);margin-left:10px}
+  header nav a{font-weight:500;text-decoration:none;border-bottom:2px solid var(--steel);margin-left:18px}
+  header nav a[aria-current="page"]{border-bottom-color:var(--ink)}
+  .hero{padding:40px 0 32px;max-width:800px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,4.4vw,46px);line-height:1.12;letter-spacing:-.015em;margin:0 0 18px;overflow-wrap:break-word}
+  .lede{font-size:19px;color:var(--soft);margin:0 0 20px;max-width:60ch}
+  .btn{display:inline-block;background:var(--steel);color:#fff;text-decoration:none;font-weight:600;padding:14px 22px;border-radius:4px;border:0;font:inherit;font-weight:600;cursor:pointer}
+  .btn:hover{background:#183d60}
+  .btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink);padding:12px 20px;margin-left:12px}
+  .card{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:24px}
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 8px;max-width:720px}
+  ol.steps li{counter-increment:s;position:relative;padding:0 0 22px 52px}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:34px;height:34px;border-radius:50%;border:2px solid var(--steel);display:grid;place-items:center;font-weight:600;color:var(--steel)}
+  ol.steps strong{display:block}
+  .fine{font-size:14px;color:var(--soft)}
+  footer{border-top:1px solid var(--rule);padding:30px 0 48px;color:var(--soft);font-size:14px}
+  /* guides */
+  .crumb{font-size:14px;color:var(--soft);padding-top:22px}
+  .crumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px}
+  .crumb li+li::before{content:"\203A";margin:0 6px;color:var(--soft)}
+  .crumb a{color:var(--soft)}
+  .meta{font-size:14px;color:var(--soft);margin:0}
+  .answer{background:var(--steel-tint);border:2px solid var(--steel);border-radius:6px;padding:20px 24px;max-width:760px;margin:0 0 8px}
+  .answer p{margin:0}
+  .prose{max-width:740px;padding-bottom:24px}
+  .prose h2{font-family:var(--serif);font-weight:600;font-size:clamp(25px,3.2vw,30px);line-height:1.2;margin:48px 0 12px;padding-top:28px;border-top:1px solid var(--rule)}
+  .prose h3{font-family:var(--serif);font-weight:600;font-size:21px;line-height:1.3;margin:28px 0 8px}
+  .prose p,.prose ul,.prose ol{margin:0 0 16px}
+  .prose ul,.prose ol:not(.steps){padding-left:22px}
+  .prose li{margin-bottom:6px}
+  .prose code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;background:#fff;border:1px solid var(--rule);border-radius:3px;padding:1px 5px;overflow-wrap:anywhere}
+  .prose pre{background:#13202E;color:#E8EDF3;border-radius:6px;padding:16px 18px;overflow-x:auto;font-size:14px;line-height:1.55;margin:0 0 18px}
+  .prose pre code{background:none;border:0;padding:0;color:inherit;font-size:inherit;overflow-wrap:normal}
+  .tbl{overflow-x:auto;margin:0 0 20px;border:1px solid var(--rule);border-radius:6px;background:#fff}
+  .tbl table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.5}
+  .tbl caption{text-align:left;font-size:14px;color:var(--soft);padding:12px 14px 0}
+  .tbl th,.tbl td{text-align:left;vertical-align:top;padding:11px 14px;border-bottom:1px solid var(--rule)}
+  .tbl thead th{background:var(--steel-tint);font-weight:600}
+  .tbl tr:last-child td{border-bottom:0}
+  ul.check{list-style:none;padding-left:0}
+  .prose ul.check{padding-left:0}
+  ul.check li{position:relative;padding-left:30px}
+  ul.check li::before{content:"";position:absolute;left:2px;top:.32em;width:16px;height:16px;border:2px solid var(--steel);border-radius:3px;background:#fff}
+  .cta{background:#fff;border:1px solid var(--rule);border-left:5px solid var(--steel);border-radius:0 6px 6px 0;padding:22px 26px;margin:32px 0 8px}
+  .cta p{margin:0 0 14px}
+  .note{background:var(--warn-tint);border-left:5px solid var(--warn);padding:14px 18px;border-radius:0 6px 6px 0;font-size:15px}
+  .faq details{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:14px 18px;margin-bottom:10px}
+  .faq summary{font-weight:600;cursor:pointer}
+  .faq details p{margin:10px 0 0}
+  .sources ol{padding-left:22px;font-size:15px}
+  .sources li{overflow-wrap:anywhere}
+  .related{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:0 0 16px}
+  .related a{display:block;background:#fff;border:1px solid var(--rule);border-radius:6px;padding:16px 18px;text-decoration:none}
+  .related a strong{display:block;font-family:var(--serif);font-size:19px;line-height:1.25;margin-bottom:4px}
+  .related a span{color:var(--soft);font-size:15px}
+  .guides{display:grid;gap:20px;max-width:800px;margin-bottom:40px}
+  .guides .card h2{font-family:var(--serif);font-size:24px;line-height:1.25;margin:0 0 8px}
+  .guides .card h2 a{text-decoration:none}
+  .guides .card p{margin:0 0 10px}
+  .tag{display:inline-block;font-size:13px;font-weight:600;color:var(--steel);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+  @media (max-width:860px){.related{grid-template-columns:1fr}.btn.ghost{margin-left:0;margin-top:10px}.hero{padding:32px 0 24px}}
+  @media (max-width:560px){header nav{width:100%}header nav a{margin:0 16px 0 0}.brand small{display:block;margin:2px 0 0}.answer,.cta{padding:18px}.tbl{overflow-x:visible}.tbl thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.tbl tr{display:block;border-bottom:1px solid var(--rule);padding:6px 0}.tbl tbody tr:last-child{border-bottom:0}.tbl td{display:block;border:0;padding:4px 14px}.tbl td::before{content:attr(data-label);display:block;font-size:12px;font-weight:600;color:var(--soft);text-transform:uppercase;letter-spacing:.04em}.tbl td:first-child{font-weight:600}.tbl table{font-size:15px}}
+</style>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "CRA : signaler une vulnérabilité exploitée en 24 heures, et préparer le SBOM de 2027",
+ "description": "Cyber Resilience Act : alerte sous 24 heures, notification sous 72 heures, rapport final, plateforme ENISA, CERT-FR, SBOM et sanctions. Procédure pratique.",
+ "inLanguage": "fr-FR",
+ "datePublished": "2026-11-03",
+ "dateModified": "2026-11-03",
+ "author": {
+  "@type": "Person",
+  "name": "Amine",
+  "jobTitle": "Ingénieur DevOps"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Reprisa",
+  "url": "https://reprisa.fr"
+ },
+ "mainEntityOfPage": {
+  "@type": "WebPage",
+  "@id": "https://reprisa.fr/blog/cra-signalement-vulnerabilite-24-heures/"
+ },
+ "url": "https://reprisa.fr/blog/cra-signalement-vulnerabilite-24-heures/"
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Accueil",
+   "item": "https://reprisa.fr/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Guides",
+   "item": "https://reprisa.fr/blog/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Signalement CRA sous 24 heures",
+   "item": "https://reprisa.fr/blog/cra-signalement-vulnerabilite-24-heures/"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Le Cyber Resilience Act s'applique-t-il aux logiciels SaaS ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Un service SaaS pur n'est pas en tant que tel un produit au sens du CRA, qui vise les produits comportant des éléments numériques mis sur le marché. Une solution de traitement de données à distance nécessaire au fonctionnement d'un produit, comme le back-end d'un objet connecté ou d'une application, en fait toutefois partie. Les services SaaS relèvent par ailleurs d'autres textes, comme NIS 2 selon le secteur."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Faut-il signaler une vulnérabilité qui n'est pas exploitée ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Non, pas au titre de l'article 14. Seules les vulnérabilités activement exploitées et les incidents graves sont à notifier. Les autres failles relèvent de votre processus de gestion des vulnérabilités, que l'annexe I rend obligatoire à partir du 11 décembre 2027. Le CRA prévoit aussi un signalement volontaire."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Le SBOM doit-il être publié ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Non. Le règlement exige un SBOM dans un format couramment utilisé et lisible par machine, couvrant au moins les dépendances de premier niveau, à partir du 11 décembre 2027. Il fait partie de la documentation technique et doit être fourni à l'autorité de surveillance du marché sur demande motivée. Le publier reste un choix du fabricant."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Que risque-t-on si l'on dépasse le délai de 24 heures ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Le non-respect de l'article 14 entre dans la tranche la plus élevée de l'article 64 : jusqu'à 15 000 000 € ou 2,5 % du chiffre d'affaires annuel mondial. Les micro et petites entreprises ne peuvent pas être sanctionnées pour le seul dépassement du délai de l'alerte précoce, mais doivent quand même signaler."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Les produits vendus avant décembre 2027 sont-ils concernés ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Pour le signalement, oui : l'article 69, paragraphe 3, applique l'article 14 à tous les produits, y compris ceux mis sur le marché avant le 11 décembre 2027. Pour les autres exigences, ces produits ne sont concernés qu'en cas de modification substantielle après cette date."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="brand" href="/">Reprisa<small>Cyber Resilience Act</small></a>
+  <nav aria-label="Navigation principale"><a href="/blog/">Guides</a><a href="/cra/">Cyber Resilience Act</a><a href="/cra/#contact">Contact</a></nav>
+</div></header>
+
+<main class="wrap">
+  <nav class="crumb" aria-label="Fil d'Ariane"><ol><li><a href="/">Accueil</a></li><li><a href="/blog/">Guides</a></li><li aria-current="page">Signalement CRA sous 24&nbsp;heures</li></ol></nav>
+  <article>
+  <div class="hero">
+    <h1>CRA&nbsp;: signaler une vulnérabilité exploitée en 24&nbsp;heures, et préparer le SBOM de 2027</h1>
+    <p class="lede">Pour les fabricants de logiciels, d'applications et d'objets connectés vendus dans l'Union. Ce qui s'applique depuis le 11 septembre 2026, ce qui arrive le 11 décembre 2027, et la chaîne technique qui permet de tenir les délais.</p>
+    <p class="meta">Par Amine, ingénieur DevOps chez Reprisa · <time datetime="2026-11-03">Mis à jour le 3 novembre 2026</time></p>
+  </div>
+  <div class="answer"><p>Depuis le 11 septembre 2026, l'article 14 du Cyber Resilience Act (règlement (UE) 2024/2847) oblige tout fabricant d'un produit comportant des éléments numériques à notifier les vulnérabilités activement exploitées et les incidents graves, via la plateforme unique de signalement de l'ENISA&nbsp;: alerte précoce sous 24&nbsp;heures, notification sous 72&nbsp;heures, rapport final ensuite. L'obligation couvre aussi les produits déjà sur le marché. Les exigences essentielles, dont le SBOM, les mises à jour de sécurité et le marquage CE, s'appliquent à partir du 11 décembre 2027.</p></div>
+  <div class="prose">
+
+  <h2 id="delais">Les délais de l'article 14</h2>
+  <p>Le délai court à partir du moment où le fabricant <strong>a connaissance</strong> de l'exploitation ou de l'incident. Le règlement distingue deux types d'événements.</p>
+  <div class="tbl">
+  <table>
+    <caption>Délais de signalement prévus par l'article 14 du règlement (UE) 2024/2847</caption>
+    <thead><tr><th scope="col">Événement</th><th scope="col">Alerte précoce</th><th scope="col">Notification</th><th scope="col">Rapport final</th></tr></thead>
+    <tbody>
+      <tr><td data-label="Événement">Vulnérabilité activement exploitée (paragraphe 2)</td><td data-label="Alerte précoce">24&nbsp;heures</td><td data-label="Notification">72&nbsp;heures</td><td data-label="Rapport final">Au plus tard 14&nbsp;jours après la mise à disposition d'une mesure corrective ou d'atténuation</td></tr>
+      <tr><td data-label="Événement">Incident grave ayant une incidence sur la sécurité du produit (paragraphe 4)</td><td data-label="Alerte précoce">24&nbsp;heures, en indiquant si l'incident semble causé par un acte illicite ou malveillant</td><td data-label="Notification">72&nbsp;heures</td><td data-label="Rapport final">Dans un délai d'un mois après la notification à 72&nbsp;heures</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>La notification à 72&nbsp;heures décrit la nature générale de la vulnérabilité ou de l'incident, l'évaluation initiale, et les mesures correctives prises ou que les utilisateurs peuvent prendre. Le rapport final précise la gravité, l'impact, et la mesure corrective ou la mise à jour de sécurité. Le fabricant doit aussi informer les utilisateurs concernés et, si nécessaire, leur indiquer les mesures à prendre (article 14, paragraphe 8).</p>
+  <h3>Qu'est-ce qu'une vulnérabilité «&nbsp;activement exploitée&nbsp;»&nbsp;?</h3>
+  <p>L'article 3 la définit comme une vulnérabilité pour laquelle il existe des éléments fiables montrant qu'un acteur malveillant l'a exploitée dans un système sans l'autorisation de son propriétaire. Une faille découverte en interne, ou signalée par un chercheur sans trace d'exploitation, relève de votre gestion des vulnérabilités, pas de l'article 14. C'est la décision la plus délicate&nbsp;: désignez à l'avance qui la prend.</p>
+
+  <h2 id="destinataires">À qui signaler&nbsp;: plateforme ENISA et CERT-FR</h2>
+  <p>Le signalement se fait une seule fois, sur la <strong>plateforme unique de signalement</strong> opérée par l'ENISA et ouverte le 11 septembre 2026. Il est adressé au CSIRT désigné comme coordinateur, celui de l'État membre de votre établissement principal dans l'Union, et transmis en même temps à l'ENISA. Le CSIRT coordinateur le partage ensuite avec les CSIRT des autres États membres où le produit est disponible.</p>
+  <p>En France, l'ANSSI est le CSIRT national au titre du CRA et assure la réception et la coordination via le CERT-FR. Si vous n'êtes pas établi dans l'Union, l'article 14, paragraphe 7, fixe un ordre de rattachement, en commençant par l'État membre de votre mandataire.</p>
+  <p>Créez votre compte sur la plateforme avant d'en avoir besoin.</p>
+
+  <h2 id="perimetre">Qui est concerné</h2>
+  <h3>Le fabricant</h3>
+  <p>Est fabricant celui qui conçoit ou fabrique un produit comportant des éléments numériques, ou le fait concevoir ou fabriquer, et le commercialise sous son nom ou sa marque, à titre onéreux ou gratuit. Un importateur ou un distributeur qui met un produit sur le marché sous sa propre marque, ou qui le modifie substantiellement, devient fabricant.</p>
+  <p>Le règlement couvre les logiciels installés, les applications mobiles et de bureau, les firmwares et les objets connectés. Le SaaS pur n'est pas en tant que tel un produit au sens du CRA&nbsp;; en revanche, une solution de traitement de données à distance nécessaire au fonctionnement d'un produit, comme le back-end cloud d'un objet connecté, en fait partie.</p>
+  <h3>Les produits déjà sur le marché</h3>
+  <p>Pour les produits mis sur le marché avant le 11 décembre 2027, les exigences du règlement ne s'appliquent qu'en cas de modification substantielle (article 69, paragraphe 2). Mais le paragraphe 3 fait exception pour l'article 14&nbsp;: <strong>l'obligation de signalement vaut pour tous les produits</strong>, y compris ceux vendus avant cette date. Une ancienne version d'un firmware encore en service est donc concernée dès aujourd'hui.</p>
+
+  <h2 id="2027">Ce qui s'applique le 11 décembre 2027</h2>
+  <p>L'article 71 fixe l'application générale du règlement au 11 décembre 2027. À cette date, tout produit mis sur le marché devra satisfaire aux exigences essentielles de l'annexe I et porter le marquage CE.</p>
+  <ul class="check">
+    <li><strong>Sécurité dès la conception</strong> (annexe I, partie I)&nbsp;: absence de vulnérabilité exploitable connue à la mise sur le marché, configuration sécurisée par défaut, mises à jour de sécurité, automatiques par défaut quand c'est pertinent, avec possibilité de les refuser.</li>
+    <li><strong>SBOM</strong> (annexe I, partie II, point 1)&nbsp;: identifier et documenter les composants du produit, notamment par une nomenclature logicielle dans un format couramment utilisé et lisible par machine, couvrant au moins les dépendances de premier niveau.</li>
+    <li><strong>Correction sans délai</strong> (point 2), avec des mises à jour de sécurité livrées séparément des mises à jour fonctionnelles quand c'est techniquement possible.</li>
+    <li><strong>Tests réguliers</strong> (point 3), <strong>divulgation</strong> des vulnérabilités corrigées une fois la mise à jour disponible (point 4), et <strong>politique de divulgation coordonnée</strong> (point 5).</li>
+    <li><strong>Adresse de contact</strong> publique pour le signalement des vulnérabilités (point 6).</li>
+    <li><strong>Diffusion sécurisée et gratuite</strong> des mises à jour, avec un avis expliquant les actions à mener (points 7 et 8).</li>
+    <li><strong>Période de support</strong> d'au moins cinq ans, sauf si la durée d'utilisation attendue du produit est plus courte (article 13, paragraphe 8).</li>
+    <li><strong>Documentation technique, évaluation de la conformité et marquage CE</strong>. Pour les produits importants ou critiques des annexes III et IV, l'évaluation peut exiger un organisme notifié.</li>
+  </ul>
+  <p>Le règlement n'impose pas de publier le SBOM. Il fait partie de la documentation technique, à fournir à l'autorité de surveillance du marché sur demande motivée.</p>
+
+  <h2 id="sanctions">Les sanctions prévues</h2>
+  <p>L'article 64 fixe des plafonds, que chaque État membre met en œuvre dans son régime de sanctions&nbsp;:</p>
+  <ul>
+    <li>jusqu'à <strong>15&nbsp;000 000&nbsp;€</strong> ou <strong>2,5&nbsp;%</strong> du chiffre d'affaires annuel mondial, le montant le plus élevé étant retenu, pour le non-respect des exigences essentielles de l'annexe I et des obligations des articles 13 et 14, donc du signalement&nbsp;;</li>
+    <li>jusqu'à 10&nbsp;000 000&nbsp;€ ou 2&nbsp;% pour d'autres obligations des opérateurs économiques&nbsp;;</li>
+    <li>jusqu'à 5&nbsp;000 000&nbsp;€ ou 1&nbsp;% pour des informations inexactes, incomplètes ou trompeuses fournies aux organismes notifiés ou aux autorités.</li>
+  </ul>
+  <p>Les micro et petites entreprises ne peuvent pas recevoir d'amende pour le seul dépassement du délai de 24&nbsp;heures de l'alerte précoce (article 64, paragraphe 10). Elles restent tenues de signaler. En France, l'ANFR est l'autorité de surveillance du marché pour les produits numériques&nbsp;; le détail du régime national de sanctions est à vérifier au moment où vous lisez ces lignes.</p>
+
+  <h2 id="procedure">Une procédure de signalement en 24&nbsp;heures</h2>
+  <p>Le délai inclut la qualification&nbsp;: la procédure doit être écrite et répétée avant le premier vrai cas.</p>
+  <ol class="steps">
+    <li><strong>H+0&nbsp;: réception et horodatage.</strong> Toute information sur une exploitation possible, qu'elle vienne d'un client, d'un chercheur, d'un avis de sécurité ou de votre veille, ouvre un ticket horodaté. C'est le point de départ défendable du délai.</li>
+    <li><strong>H+2&nbsp;: identification des versions touchées.</strong> Le SBOM archivé de chaque version livrée permet de savoir en quelques minutes quels produits et quelles versions embarquent le composant en cause.</li>
+    <li><strong>H+6&nbsp;: qualification.</strong> La personne désignée décide si les éléments montrent une exploitation active. La décision et ses motifs sont consignés, y compris quand elle est négative.</li>
+    <li><strong>H+12&nbsp;: rédaction de l'alerte précoce.</strong> Un modèle prérempli&nbsp;: produit, versions, nature de la faille, États membres où le produit est disponible.</li>
+    <li><strong>Avant H+24&nbsp;: envoi sur la plateforme de l'ENISA.</strong> Puis préparation de la notification à 72&nbsp;heures et de l'information des utilisateurs.</li>
+  </ol>
+  <p>Deux conditions font la différence&nbsp;: une astreinte capable de décider le week-end, et un exercice à blanc chronométré au moins une fois par an.</p>
+
+  <h2 id="sbom">Le pipeline SBOM, concrètement</h2>
+  <p>Les deux formats les plus utilisés sont CycloneDX, normalisé par l'Ecma sous la référence ECMA-424, et SPDX, normalisé sous la référence ISO/IEC 5962. L'un comme l'autre répond à l'exigence d'un format couramment utilisé et lisible par machine. Le principe&nbsp;: un SBOM généré et archivé à chaque version livrée, puis surveillé en continu.</p>
+<pre><code># Génération du SBOM d'une image ou d'un répertoire (Syft)
+syft ghcr.io/acme/produit:2.4.1 -o cyclonedx-json=sbom-2.4.1.cdx.json
+
+# Analyse des vulnérabilités connues à partir du SBOM (Grype ou Trivy)
+grype sbom:./sbom-2.4.1.cdx.json --fail-on high
+trivy sbom ./sbom-2.4.1.cdx.json</code></pre>
+  <ul>
+    <li><strong>Archivage par version.</strong> Le SBOM est publié comme artefact de la release et conservé aussi longtemps que la version est en circulation, pas seulement pendant la période de support.</li>
+    <li><strong>Surveillance continue.</strong> Un outil comme OWASP Dependency-Track réanalyse les SBOM archivés à chaque nouvelle vulnérabilité publiée, y compris pour les versions anciennes.</li>
+    <li><strong>Signal d'exploitation.</strong> Le catalogue KEV de la CISA et la base européenne des vulnérabilités de l'ENISA (EUVD) aident à repérer les failles signalées comme exploitées. Ce sont des indices, pas la qualification juridique, qui reste la vôtre.</li>
+  </ul>
+  <p>Si vous vendez aussi un service à des banques ou à des assureurs, les mêmes exigences de preuve existent côté DORA&nbsp;: voir notre guide sur le <a href="/blog/questionnaire-dora-fournisseur/">questionnaire DORA fournisseur</a> et celui sur le <a href="/blog/plan-de-sortie-reversibilite-dora/">plan de sortie et la réversibilité</a>.</p>
+
+  <div class="cta">
+    <p><strong>Où en est votre produit&nbsp;?</strong> Le diagnostic CRA de Reprisa distingue, en dix questions, ce qui est déjà obligatoire depuis le 11 septembre 2026 de ce qui arrive le 11 décembre 2027. Rien n'est envoyé, rien n'est enregistré.</p>
+    <a class="btn" href="/cra/#diagnostic">Faire le diagnostic CRA</a>
+  </div>
+  <p class="fine">Reprisa met en place la chaîne technique et les procédures. Ce n'est ni un organisme notifié ni un cabinet d'avocats.</p>
+
+  <h2 id="faq">Questions fréquentes</h2>
+  <div class="faq">
+    <details><summary>Le Cyber Resilience Act s'applique-t-il aux logiciels SaaS&nbsp;?</summary><p>Un service SaaS pur n'est pas en tant que tel un produit au sens du CRA, qui vise les produits comportant des éléments numériques mis sur le marché. Une solution de traitement de données à distance nécessaire au fonctionnement d'un produit, comme le back-end d'un objet connecté ou d'une application, en fait toutefois partie. Les services SaaS relèvent par ailleurs d'autres textes, comme NIS 2 selon le secteur.</p></details>
+    <details><summary>Faut-il signaler une vulnérabilité qui n'est pas exploitée&nbsp;?</summary><p>Non, pas au titre de l'article 14. Seules les vulnérabilités activement exploitées et les incidents graves sont à notifier. Les autres failles relèvent de votre processus de gestion des vulnérabilités, que l'annexe I rend obligatoire à partir du 11 décembre 2027. Le CRA prévoit aussi un signalement volontaire.</p></details>
+    <details><summary>Le SBOM doit-il être publié&nbsp;?</summary><p>Non. Le règlement exige un SBOM dans un format couramment utilisé et lisible par machine, couvrant au moins les dépendances de premier niveau, à partir du 11 décembre 2027. Il fait partie de la documentation technique et doit être fourni à l'autorité de surveillance du marché sur demande motivée. Le publier reste un choix du fabricant.</p></details>
+    <details><summary>Que risque-t-on si l'on dépasse le délai de 24&nbsp;heures&nbsp;?</summary><p>Le non-respect de l'article 14 entre dans la tranche la plus élevée de l'article 64&nbsp;: jusqu'à 15&nbsp;000 000&nbsp;€ ou 2,5&nbsp;% du chiffre d'affaires annuel mondial. Les micro et petites entreprises ne peuvent pas être sanctionnées pour le seul dépassement du délai de l'alerte précoce, mais doivent quand même signaler.</p></details>
+    <details><summary>Les produits vendus avant décembre 2027 sont-ils concernés&nbsp;?</summary><p>Pour le signalement, oui&nbsp;: l'article 69, paragraphe 3, applique l'article 14 à tous les produits, y compris ceux mis sur le marché avant le 11 décembre 2027. Pour les autres exigences, ces produits ne sont concernés qu'en cas de modification substantielle après cette date.</p></details>
+  </div>
+
+  <h2 id="sources">Sources</h2>
+  <div class="sources">
+  <ol>
+    <li><a href="https://eur-lex.europa.eu/eli/reg/2024/2847/oj" rel="noopener">Règlement (UE) 2024/2847 (Cyber Resilience Act), articles 3, 13, 14, 64, 69 et 71, annexe I</a> — EUR-Lex, Journal officiel du 20.11.2024.</li>
+    <li><a href="https://digital-strategy.ec.europa.eu/en/policies/cra-reporting" rel="noopener">Commission européenne — Cyber Resilience Act&nbsp;: obligations de signalement</a> — page de la Commission (en anglais).</li>
+    <li><a href="https://www.enisa.europa.eu/news/the-cra-single-reporting-platform-is-launched" rel="noopener">ENISA — The CRA Single Reporting Platform is launched</a> — annonce de l'ouverture de la plateforme le 11 septembre 2026.</li>
+    <li><a href="https://cyber.gouv.fr/actualites/cra-lanssi-lanfr-et-la-dge-accompagnent-les-fabricants-dans-la-conformite-des-produits-numeriques/" rel="noopener">ANSSI — Cyber Résilience Act&nbsp;: l'ANSSI, l'ANFR et la DGE accompagnent les fabricants</a> — 23 septembre 2026.</li>
+    <li><a href="https://www.enisa.europa.eu/topics/product-security-and-certification/single-reporting-platform-srp" rel="noopener">ENISA — Single Reporting Platform (SRP)</a> — documentation et FAQ de la plateforme.</li>
+  </ol>
+  <p class="fine">Textes consultés le 3 novembre 2026. En cas de divergence, seule la version publiée au Journal officiel de l'Union européenne fait foi.</p>
+  </div>
+
+  <h2>À lire aussi</h2>
+  <div class="related">
+    <a href="/blog/questionnaire-dora-fournisseur/"><strong>Questionnaire DORA fournisseur&nbsp;: questions et preuves</strong><span>Pour les éditeurs qui vendent aussi aux banques et aux assureurs.</span></a>
+    <a href="/blog/plan-de-sortie-reversibilite-dora/"><strong>Plan de sortie DORA&nbsp;: la réversibilité SaaS testée</strong><span>Documenter et tester un export complet des données d'un client.</span></a>
+    <a href="/cra/"><strong>L'offre Reprisa Cyber Resilience Act</strong><span>Pipeline SBOM et procédure de signalement&nbsp;: 2&nbsp;900&nbsp;€ HT ou 5&nbsp;900&nbsp;€ HT par produit.</span></a>
+  </div>
+  </div>
+  </article>
+</main>
+
+<footer><div class="wrap">
+  <p>Reprisa — <a href="/">preuves de résilience DORA</a> pour les fournisseurs informatiques du secteur financier et <a href="/cra/">mise en conformité technique au Cyber Resilience Act</a>. <a href="/blog/">Guides</a>. Contact&nbsp;: amine@reprisa.fr. Reprisa réalise des tests techniques et rédige des preuves&nbsp;; ce n'est ni un cabinet d'avocats ni un organisme notifié, et ces guides ne constituent pas un avis juridique.</p>
+</div></footer>
+</body>
+</html>
