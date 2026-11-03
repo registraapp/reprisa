@@ -86,6 +86,12 @@
   .tag{display:inline-block;font-size:13px;font-weight:600;color:var(--steel);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
   @media (max-width:860px){.related{grid-template-columns:1fr}.btn.ghost{margin-left:0;margin-top:10px}.hero{padding:32px 0 24px}}
   @media (max-width:560px){header nav{width:100%}header nav a{margin:0 16px 0 0}.brand small{display:block;margin:2px 0 0}.answer,.cta{padding:18px}.tbl{overflow-x:visible}.tbl thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.tbl tr{display:block;border-bottom:1px solid var(--rule);padding:6px 0}.tbl tbody tr:last-child{border-bottom:0}.tbl td{display:block;border:0;padding:4px 14px}.tbl td::before{content:attr(data-label);display:block;font-size:12px;font-weight:600;color:var(--soft);text-transform:uppercase;letter-spacing:.04em}.tbl td:first-child{font-weight:600}.tbl table{font-size:15px}}
+
+  header nav.mainnav{display:flex;flex-wrap:wrap;gap:6px 20px;align-items:baseline}
+  header nav.mainnav a{margin:0;font-weight:500;text-decoration:none;border-bottom:2px solid transparent;padding-bottom:1px}
+  header nav.mainnav a:hover{border-bottom-color:var(--rule)}
+  header nav.mainnav a[aria-current="page"]{border-bottom-color:currentColor}
+  @media (max-width:860px){header .wrap{flex-wrap:wrap;gap:10px 16px}}
 </style>
 <script type="application/ld+json">
 {
@@ -146,7 +152,7 @@
 <body>
 <header><div class="wrap">
   <a class="brand" href="/">Reprisa<small>guides DORA et Cyber Resilience Act</small></a>
-  <nav aria-label="Navigation principale"><a href="/blog/" aria-current="page">Guides</a><a href="/cra/">Cyber Resilience Act</a><a href="/#contact">Contact</a></nav>
+  <nav class="mainnav" aria-label="Navigation principale"><a href="/">DORA</a><a href="/cra/">Cyber Resilience Act</a><a href="/blog/" aria-current="page">Guides</a><a href="/#contact">Contact</a></nav>
 </div></header>
 
 <main class="wrap">

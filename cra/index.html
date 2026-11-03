@@ -80,6 +80,12 @@
   .faq summary::after{content:"+";font-weight:400;font-size:22px;line-height:1}
   .faq details[open] summary::after{content:"\2212"}
   .faq details p{margin:10px 0 0;color:var(--ink-soft, var(--soft))}
+
+  header nav.mainnav{display:flex;flex-wrap:wrap;gap:6px 20px;align-items:baseline}
+  header nav.mainnav a{margin:0;font-weight:500;text-decoration:none;border-bottom:2px solid transparent;padding-bottom:1px}
+  header nav.mainnav a:hover{border-bottom-color:var(--rule)}
+  header nav.mainnav a[aria-current="page"]{border-bottom-color:currentColor}
+  @media (max-width:860px){header .wrap{flex-wrap:wrap;gap:10px 16px}}
 </style>
 <link rel="canonical" href="https://reprisa.fr/cra/">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
@@ -97,7 +103,7 @@
 <body>
 <header><div class="wrap">
   <a class="brand" href="/">Reprisa<small>Cyber Resilience Act</small></a>
-  <nav><a href="#diagnostic">Diagnostic gratuit</a><a href="#contact">Parler d'un produit</a></nav>
+  <nav class="mainnav" aria-label="Navigation principale"><a href="/">DORA</a><a href="/cra/" aria-current="page">Cyber Resilience Act</a><a href="/blog/">Guides</a><a href="#contact">Contact</a></nav>
 </div></header>
 
 <main class="wrap">
