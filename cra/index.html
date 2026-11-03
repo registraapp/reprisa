@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reprisa — Cyber Resilience Act : SBOM, surveillance des failles et signalement sous 24 heures</title>
+<meta name="description" content="Fabricants de logiciels et d'objets connectés : depuis le 11 septembre 2026, le CRA impose de signaler les failles exploitées sous 24 heures. Pipeline SBOM, surveillance des vulnérabilités et procédure de signalement, à prix fixe.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F5F6F8;--ink:#13202E;--soft:#4F5D6C;--rule:#D2D8E0;--steel:#1F4E79;--steel-tint:#E3ECF5;--ok:#2D6A4F;--ok-tint:#E2F0E8;--warn:#8A5A00;--warn-tint:#F7EDD5;--bad:#9B2C2C;--bad-tint:#F6E1E1;--focus:#2C5FD9;--serif:"Newsreader",Georgia,serif;--sans:"Inter Tight",system-ui,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6}
+  :focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+  a{color:var(--ink)}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+  header .wrap{display:flex;justify-content:space-between;align-items:baseline;padding:24px 20px;border-bottom:1px solid var(--rule)}
+  .brand{font-family:var(--serif);font-weight:600;font-size:26px;text-decoration:none;letter-spacing:-.01em}
+  .brand small{font-family:var(--sans);font-weight:400;font-size:14px;color:var(--soft);margin-left:10px}
+  header nav a{font-weight:500;text-decoration:none;border-bottom:2px solid var(--steel);margin-left:18px}
+  .hero{padding:64px 0 48px;max-width:800px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(32px,4.8vw,50px);line-height:1.1;letter-spacing:-.015em;margin:0 0 20px}
+  .lede{font-size:19px;color:var(--soft);margin:0 0 28px;max-width:60ch}
+  .btn{display:inline-block;background:var(--steel);color:#fff;text-decoration:none;font-weight:600;padding:14px 22px;border-radius:4px;border:0;font:inherit;font-weight:600;cursor:pointer}
+  .btn:hover{background:#183d60}
+  .btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink);padding:12px 20px;margin-left:12px}
+  section{padding:56px 0;border-top:1px solid var(--rule)}
+  h2.s{font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.2;margin:0 0 10px}
+  .sub{color:var(--soft);max-width:64ch;margin:0 0 28px}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .card{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:24px}
+  .card h3{font-family:var(--serif);font-size:21px;margin:0 0 10px}
+  .card ul{padding-left:18px;margin:0}.card li{margin-bottom:7px}
+  .card.paper{background:#fbfbfb}
+  .card.real{border:2px solid var(--steel);background:var(--steel-tint)}
+  /* questionnaire */
+  .quiz{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:8px 24px 20px}
+  .q{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--rule)}
+  .q:last-of-type{border-bottom:0}
+  .q p{margin:0}.q small{display:block;color:var(--soft);font-size:13px;margin-top:2px}
+  .seg{display:inline-flex;border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+  .seg button{font:inherit;font-size:14px;border:0;background:#fff;padding:7px 12px;cursor:pointer;color:var(--ink);border-left:1px solid var(--rule)}
+  .seg button:first-child{border-left:0}
+  .seg button[aria-pressed="true"].y{background:var(--ok);color:#fff}
+  .seg button[aria-pressed="true"].p{background:var(--warn);color:#fff}
+  .seg button[aria-pressed="true"].n{background:var(--bad);color:#fff}
+  .result{margin-top:22px;border-radius:6px;padding:22px 24px;border:1px solid var(--rule);background:#fff}
+  .result.bad{background:var(--bad-tint);border-color:var(--bad)}
+  .result.mid{background:var(--warn-tint);border-color:var(--warn)}
+  .result.good{background:var(--ok-tint);border-color:var(--ok)}
+  .result h3{font-family:var(--serif);font-size:24px;margin:0 0 8px}
+  .result .score{font-size:40px;font-weight:600;font-variant-numeric:tabular-nums}
+  .result ul{margin:10px 0 0;padding-left:18px}
+  .offers{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+  .offer{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:24px}
+  .offer.main{border:2px solid var(--steel);background:var(--steel-tint)}
+  .offer h3{font-family:var(--serif);font-size:22px;margin:0 0 4px}
+  .offer .price{font-size:26px;font-weight:600;margin:6px 0 12px}
+  .offer .price span{font-size:15px;font-weight:400;color:var(--soft)}
+  .offer ul{padding-left:18px;margin:0}.offer li{margin-bottom:6px}
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:0;max-width:720px}
+  ol.steps li{counter-increment:s;position:relative;padding:0 0 22px 52px}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:34px;height:34px;border-radius:50%;border:2px solid var(--steel);display:grid;place-items:center;font-weight:600;color:var(--steel)}
+  ol.steps strong{display:block}
+  .guarantee{background:#fff;border-left:5px solid var(--steel);padding:22px 26px;max-width:760px;border-radius:0 6px 6px 0}
+  .guarantee p{margin:0}
+  form{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:26px;max-width:620px}
+  label{display:block;font-weight:500;margin-bottom:6px}
+  input,select,textarea{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:1px solid #B5BFCC;border-radius:4px;background:#fff;color:var(--ink);margin-bottom:16px}
+  .fine{font-size:14px;color:var(--soft)}
+  .thanks{display:none;background:#fff;border:1px solid var(--rule);border-radius:6px;padding:26px;max-width:620px}
+  footer{border-top:1px solid var(--rule);padding:30px 0 48px;color:var(--soft);font-size:14px}
+  @media (max-width:860px){.split,.offers{grid-template-columns:1fr}.q{grid-template-columns:1fr}.btn.ghost{margin-left:0;margin-top:10px}.hero{padding:44px 0 36px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="brand" href="/">Reprisa<small>Cyber Resilience Act</small></a>
+  <nav><a href="#diagnostic">Diagnostic gratuit</a><a href="#contact">Parler d'un produit</a></nav>
+</div></header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Une faille exploitée dans votre produit&nbsp;? Vous avez désormais 24 heures pour la signaler.</h1>
+    <p class="lede">Depuis le 11 septembre 2026, le Cyber Resilience Act oblige tout fabricant de logiciel, d'application ou d'objet connecté vendu dans l'Union à signaler les vulnérabilités activement exploitées : alerte sous 24 heures, notification sous 72 heures, rapport final sous 14 jours. Le 11 décembre 2027, le reste suit : inventaire des composants, gestion des vulnérabilités, mises à jour de sécurité, marquage CE. Reprisa installe la chaîne technique qui vous permet de tenir ces délais.</p>
+    <a class="btn" href="#diagnostic">Votre produit est-il concerné&nbsp;?</a>
+    <a class="btn ghost" href="#offre">Voir l'offre</a>
+  </div>
+
+  <section>
+    <h2 class="s">Tenir 24 heures suppose de savoir ce qu'il y a dans votre produit</h2>
+    <p class="sub">On ne signale pas une faille dans une bibliothèque qu'on ne sait pas embarquer. Le CRA se joue dans la chaîne de build, pas dans un document.</p>
+    <div class="split">
+      <div class="card paper">
+        <h3>La situation la plus courante</h3>
+        <ul>
+          <li>Personne ne sait lister les dépendances de la version livrée il y a six mois</li>
+          <li>Les alertes de sécurité arrivent par hasard, ou pas du tout</li>
+          <li>Aucune adresse publique pour signaler une faille</li>
+          <li>Aucune procédure écrite pour alerter le CERT-FR via la plateforme de l'ENISA</li>
+        </ul>
+      </div>
+      <div class="card real">
+        <h3>Ce que Reprisa met en place</h3>
+        <ul>
+          <li>Un SBOM généré à chaque build (CycloneDX ou SPDX) et archivé par version</li>
+          <li>Une surveillance continue des failles connues dans vos dépendances, avec alertes triées</li>
+          <li>Une politique de divulgation et un point de contact public (security.txt)</li>
+          <li>La procédure de signalement 24 h / 72 h / 14 jours, prête à déclencher</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="diagnostic">
+    <h2 class="s">Diagnostic gratuit : où en êtes-vous face au CRA&nbsp;?</h2>
+    <p class="sub">Dix questions. Rien n'est envoyé, rien n'est enregistré. Le résultat distingue ce qui s'applique déjà de ce qui arrive en décembre 2027.</p>
+    <div class="quiz" id="quiz"></div>
+    <div class="result" id="res" aria-live="polite"></div>
+  </section>
+
+  <section id="offre">
+    <h2 class="s">Le pipeline CRA, à prix fixe par produit</h2>
+    <p class="sub">Intégré à votre CI/CD existante : GitHub Actions, GitLab CI, Jenkins, Azure DevOps. Outils ouverts et standards, rien de propriétaire à racheter ensuite.</p>
+    <div class="offers">
+      <div class="offer">
+        <h3>Signalement</h3>
+        <p class="price">2 900 € HT <span>par produit</span></p>
+        <ul>
+          <li>SBOM généré à chaque build et archivé</li>
+          <li>Surveillance des failles des dépendances</li>
+          <li>Procédure 24 h / 72 h / 14 jours et modèles de signalement</li>
+        </ul>
+      </div>
+      <div class="offer main">
+        <h3>Prêt pour 2027</h3>
+        <p class="price">5 900 € HT <span>par produit</span></p>
+        <ul>
+          <li>Tout le Signalement</li>
+          <li>Processus de gestion des vulnérabilités écrit et outillé</li>
+          <li>Politique de divulgation et security.txt</li>
+          <li>Durée de support et mécanisme de mise à jour documentés</li>
+          <li>Trame de la documentation technique pour le marquage CE</li>
+        </ul>
+      </div>
+      <div class="offer">
+        <h3>Veille mensuelle</h3>
+        <p class="price">290 € HT <span>par mois</span></p>
+        <ul>
+          <li>Tri des nouvelles failles qui touchent vos produits</li>
+          <li>Alerte immédiate si une faille est activement exploitée</li>
+          <li>Aide à la rédaction du signalement</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="s">Comment ça se passe</h2>
+    <ol class="steps">
+      <li><strong>Semaine 1 : inventaire.</strong> Accès en lecture au dépôt et à la CI. Premier SBOM, première liste des failles connues, cartographie des versions encore en circulation.</li>
+      <li><strong>Semaine 2 : pipeline.</strong> Génération et archivage du SBOM à chaque build, surveillance branchée, alertes routées vers la bonne personne. Tout part en pull request chez vous.</li>
+      <li><strong>Semaine 3 : procédures.</strong> Signalement, divulgation, gestion des vulnérabilités. Un exercice à blanc du signalement 24 heures, chronométré.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2 class="s">Ce que Reprisa n'est pas</h2>
+    <div class="guarantee">
+      <p>Reprisa met en place la chaîne technique et les procédures. Ce n'est ni un organisme notifié ni un cabinet d'avocats : pour les produits classés importants ou critiques, l'évaluation de conformité reste à faire avec l'organisme compétent, et le dossier préparé sert de base.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="s">Parler d'un produit</h2>
+    <p class="sub">Réponse écrite sous un jour ouvré, avec un prix ferme. Aucun appel commercial non sollicité.</p>
+    <form id="f" method="POST" action="https://formspree.io/f/mzeejnkr">
+      <label for="email">E-mail professionnel</label>
+      <input id="email" name="email" type="email" required autocomplete="email">
+      <label for="societe">Entreprise</label>
+      <input id="societe" name="entreprise" type="text" required autocomplete="organization">
+      <label for="type">Type de produit</label>
+      <select id="type" name="type_produit"><option>Objet connecté ou équipement avec firmware</option><option>Logiciel installé chez le client</option><option>Application mobile ou de bureau</option><option>Plusieurs</option></select>
+      <label for="ci">Votre intégration continue</label>
+      <select id="ci" name="ci"><option>GitHub Actions</option><option>GitLab CI</option><option>Jenkins</option><option>Azure DevOps</option><option>Autre ou aucune</option></select>
+      <label for="msg">Votre situation (facultatif)</label>
+      <textarea id="msg" name="message" rows="3"></textarea>
+      <input type="hidden" name="score_diagnostic" id="scoreField" value="">
+      <input type="hidden" name="source" value="reprisa-cra-v1">
+      <input type="hidden" name="_subject" value="Demande Reprisa (CRA)">
+      <button class="btn" type="submit">Envoyer</button>
+      <p class="fine">Vos informations servent uniquement à répondre à cette demande.</p>
+    </form>
+    <div class="thanks" id="t"><p><strong>Demande envoyée.</strong> Vous recevez une réponse écrite avec un prix ferme sous un jour ouvré.</p></div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <p>Reprisa — <a href="/">preuves de résilience DORA</a> et mise en conformité technique au Cyber Resilience Act. Contact : amine@reprisa.fr. Référence : règlement (UE) 2024/2847 (Cyber Resilience Act).</p>
+</div></footer>
+
+<script>
+(function(){
+  // [question, libellé court, échéance : 'now' = déjà applicable, '2027' = 11 décembre 2027, 'scope' = question de périmètre]
+  var Q=[
+    ["Votre entreprise vend, dans l'Union, un logiciel, une application ou un objet connecté sous son propre nom.","Fabricant au sens du CRA","scope"],
+    ["Vous savez lister toutes les dépendances logicielles d'une version déjà livrée, en moins d'une heure.","Inventaire des composants par version","now"],
+    ["Vous êtes alerté automatiquement quand une faille connue touche l'une de vos dépendances.","Surveillance des failles","now"],
+    ["Une procédure écrite dit qui signale, comment et en combien de temps, sur la plateforme de l'ENISA.","Procédure de signalement 24 h / 72 h / 14 jours","now"],
+    ["Quelqu'un est joignable en permanence pour décider d'un signalement, y compris le week-end.","Astreinte de décision","now"],
+    ["Une adresse publique permet à un chercheur de vous signaler une faille (security.txt ou page dédiée).","Point de contact public","2027"],
+    ["Votre politique de divulgation coordonnée des vulnérabilités est rédigée et publiée.","Politique de divulgation","2027"],
+    ["Un SBOM est généré automatiquement à chaque build et conservé.","SBOM automatique","2027"],
+    ["La durée pendant laquelle vous fournissez des mises à jour de sécurité est fixée et communiquée.","Durée de support","2027"],
+    ["Vos mises à jour de sécurité peuvent être livrées séparément des nouvelles fonctionnalités.","Mises à jour de sécurité séparées","2027"]
+  ];
+  var quiz=document.getElementById('quiz'),res=document.getElementById('res'),ans={};
+  Q.forEach(function(q,i){
+    var d=document.createElement('div');d.className='q';
+    var tag=q[2]==='now'?'Obligatoire depuis le 11 septembre 2026':(q[2]==='2027'?'Obligatoire au 11 décembre 2027':'Périmètre');
+    d.innerHTML='<p>'+q[0]+'<small>'+tag+'</small></p><div class="seg" role="group" aria-label="Réponse question '+(i+1)+'"><button type="button" class="y" data-v="2">Oui</button><button type="button" class="p" data-v="1">En partie</button><button type="button" class="n" data-v="0">Non</button></div>';
+    d.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){
+      d.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed','false')});
+      b.setAttribute('aria-pressed','true');ans[i]=+b.dataset.v;render();});});
+    quiz.appendChild(d);
+  });
+  function li(a){return '<ul>'+a.map(function(m){return '<li>'+m+'</li>'}).join('')+'</ul>'}
+  function render(){
+    var n=Object.keys(ans).length;
+    if(n<Q.length){res.className='result';res.innerHTML='<p>Répondez aux '+Q.length+' questions pour voir votre résultat ('+n+' sur '+Q.length+').</p>';return;}
+    if(ans[0]===0){res.className='result good';res.innerHTML='<h3>A priori, le CRA ne vous vise pas comme fabricant</h3><p>Vérifiez tout de même si vous modifiez ou commercialisez sous votre marque un produit d’un tiers : dans ce cas, vous devenez fabricant au sens du règlement.</p>';document.getElementById('scoreField').value='hors périmètre';return;}
+    var now=[],later=[],s=0,max=0;
+    Q.forEach(function(q,i){if(q[2]==='scope')return;max+=2;s+=ans[i];if(ans[i]<2)(q[2]==='now'?now:later).push(q[1]+(ans[i]===1?' (partiel)':''));});
+    var pct=Math.round(s/max*100),cls=now.length?'bad':(later.length>2?'mid':'good');
+    var html='<h3>'+(now.length?'Vous êtes exposé dès aujourd’hui':(later.length?'Le signalement est couvert, 2027 reste à préparer':'Vous êtes bien préparé'))+'</h3><div class="score">'+pct+' %</div>';
+    if(now.length)html+='<p><strong>Déjà obligatoire, et manquant :</strong></p>'+li(now);
+    if(later.length)html+='<p><strong>À mettre en place avant le 11 décembre 2027 :</strong></p>'+li(later);
+    html+='<p style="margin-top:14px">'+(now.length||later.length?'Le pipeline Reprisa couvre ces points en trois semaines. <a href="#contact">Recevoir un prix ferme</a>.':'Pensez à la veille mensuelle pour tenir les 24 heures dans la durée.')+'</p>';
+    res.className='result '+cls;res.innerHTML=html;
+    document.getElementById('scoreField').value=pct+' % ; manquants maintenant : '+now.join(', ')+' ; 2027 : '+later.join(', ');
+  }
+  render();
+  var f=document.getElementById('f'),t=document.getElementById('t');
+  f.addEventListener('submit',function(e){e.preventDefault();
+    fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}})
+    .then(function(r){if(r.ok){f.style.display='none';t.style.display='block';}else{alert("La demande n'est pas partie. Réessayez ou écrivez à amine@reprisa.fr.");}})
+    .catch(function(){alert("La demande n'est pas partie. Vérifiez votre connexion et réessayez.");});
+  });
+})();
+</script>
+</body>
+</html>
