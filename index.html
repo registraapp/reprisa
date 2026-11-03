@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reprisa — les preuves DORA que vos clients bancaires vous demandent, testées pour de vrai</title>
+<meta name="description" content="Éditeurs SaaS qui vendent aux banques et aux assureurs : test de restauration réel, plan de sortie exercé, registre des sous-traitants et procédure d'incident. Un dossier de preuves daté, à prix fixe.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F5F6F8;--ink:#13202E;--soft:#4F5D6C;--rule:#D2D8E0;--steel:#1F4E79;--steel-tint:#E3ECF5;--ok:#2D6A4F;--ok-tint:#E2F0E8;--warn:#8A5A00;--warn-tint:#F7EDD5;--bad:#9B2C2C;--bad-tint:#F6E1E1;--focus:#2C5FD9;--serif:"Newsreader",Georgia,serif;--sans:"Inter Tight",system-ui,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6}
+  :focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+  a{color:var(--ink)}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+  header .wrap{display:flex;justify-content:space-between;align-items:baseline;padding:24px 20px;border-bottom:1px solid var(--rule)}
+  .brand{font-family:var(--serif);font-weight:600;font-size:26px;text-decoration:none;letter-spacing:-.01em}
+  .brand small{font-family:var(--sans);font-weight:400;font-size:14px;color:var(--soft);margin-left:10px}
+  header nav a{font-weight:500;text-decoration:none;border-bottom:2px solid var(--steel);margin-left:18px}
+  .hero{padding:64px 0 48px;max-width:800px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(32px,4.8vw,50px);line-height:1.1;letter-spacing:-.015em;margin:0 0 20px}
+  .lede{font-size:19px;color:var(--soft);margin:0 0 28px;max-width:60ch}
+  .btn{display:inline-block;background:var(--steel);color:#fff;text-decoration:none;font-weight:600;padding:14px 22px;border-radius:4px;border:0;font:inherit;font-weight:600;cursor:pointer}
+  .btn:hover{background:#183d60}
+  .btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink);padding:12px 20px;margin-left:12px}
+  section{padding:56px 0;border-top:1px solid var(--rule)}
+  h2.s{font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.2;margin:0 0 10px}
+  .sub{color:var(--soft);max-width:64ch;margin:0 0 28px}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .card{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:24px}
+  .card h3{font-family:var(--serif);font-size:21px;margin:0 0 10px}
+  .card ul{padding-left:18px;margin:0}.card li{margin-bottom:7px}
+  .card.paper{background:#fbfbfb}
+  .card.real{border:2px solid var(--steel);background:var(--steel-tint)}
+  /* questionnaire */
+  .quiz{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:8px 24px 20px}
+  .q{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--rule)}
+  .q:last-of-type{border-bottom:0}
+  .q p{margin:0}.q small{display:block;color:var(--soft);font-size:13px;margin-top:2px}
+  .seg{display:inline-flex;border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+  .seg button{font:inherit;font-size:14px;border:0;background:#fff;padding:7px 12px;cursor:pointer;color:var(--ink);border-left:1px solid var(--rule)}
+  .seg button:first-child{border-left:0}
+  .seg button[aria-pressed="true"].y{background:var(--ok);color:#fff}
+  .seg button[aria-pressed="true"].p{background:var(--warn);color:#fff}
+  .seg button[aria-pressed="true"].n{background:var(--bad);color:#fff}
+  .result{margin-top:22px;border-radius:6px;padding:22px 24px;border:1px solid var(--rule);background:#fff}
+  .result.bad{background:var(--bad-tint);border-color:var(--bad)}
+  .result.mid{background:var(--warn-tint);border-color:var(--warn)}
+  .result.good{background:var(--ok-tint);border-color:var(--ok)}
+  .result h3{font-family:var(--serif);font-size:24px;margin:0 0 8px}
+  .result .score{font-size:40px;font-weight:600;font-variant-numeric:tabular-nums}
+  .result ul{margin:10px 0 0;padding-left:18px}
+  .offers{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+  .offer{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:24px}
+  .offer.main{border:2px solid var(--steel);background:var(--steel-tint)}
+  .offer h3{font-family:var(--serif);font-size:22px;margin:0 0 4px}
+  .offer .price{font-size:26px;font-weight:600;margin:6px 0 12px}
+  .offer .price span{font-size:15px;font-weight:400;color:var(--soft)}
+  .offer ul{padding-left:18px;margin:0}.offer li{margin-bottom:6px}
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:0;max-width:720px}
+  ol.steps li{counter-increment:s;position:relative;padding:0 0 22px 52px}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:34px;height:34px;border-radius:50%;border:2px solid var(--steel);display:grid;place-items:center;font-weight:600;color:var(--steel)}
+  ol.steps strong{display:block}
+  .guarantee{background:#fff;border-left:5px solid var(--steel);padding:22px 26px;max-width:760px;border-radius:0 6px 6px 0}
+  .guarantee p{margin:0}
+  form{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:26px;max-width:620px}
+  label{display:block;font-weight:500;margin-bottom:6px}
+  input,select,textarea{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:1px solid #B5BFCC;border-radius:4px;background:#fff;color:var(--ink);margin-bottom:16px}
+  .fine{font-size:14px;color:var(--soft)}
+  .thanks{display:none;background:#fff;border:1px solid var(--rule);border-radius:6px;padding:26px;max-width:620px}
+  footer{border-top:1px solid var(--rule);padding:30px 0 48px;color:var(--soft);font-size:14px}
+  @media (max-width:860px){.split,.offers{grid-template-columns:1fr}.q{grid-template-columns:1fr}.btn.ghost{margin-left:0;margin-top:10px}.hero{padding:44px 0 36px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="brand" href="/">Reprisa<small>preuves de résilience DORA</small></a>
+  <nav><a href="#diagnostic">Diagnostic gratuit</a><a href="#contact">Parler d'un dossier</a></nav>
+</div></header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Votre client bancaire vous demande des preuves DORA. Pas des promesses.</h1>
+    <p class="lede">Depuis janvier 2025, les banques, assureurs et sociétés de gestion doivent exiger de leurs fournisseurs informatiques une stratégie de sortie, la restitution des données, un plan de continuité testé et la liste des sous-traitants. Reprisa réalise ces tests sur votre infrastructure et vous remet un dossier de preuves daté, prêt à joindre au questionnaire de votre client.</p>
+    <a class="btn" href="#diagnostic">Faire le diagnostic en 3 minutes</a>
+    <a class="btn ghost" href="#offre">Voir l'offre</a>
+  </div>
+
+  <section>
+    <h2 class="s">Un PRA sur papier ne passe plus</h2>
+    <p class="sub">Les questionnaires fournisseurs des établissements financiers demandent de plus en plus la date du dernier test, son résultat et les écarts constatés.</p>
+    <div class="split">
+      <div class="card paper">
+        <h3>Ce que la plupart des éditeurs ont</h3>
+        <ul>
+          <li>Un document de plan de reprise rédigé il y a deux ans</li>
+          <li>Des sauvegardes « automatiques » jamais restaurées en entier</li>
+          <li>Une clause de réversibilité sans procédure d'export testée</li>
+          <li>La liste des sous-traitants dans la tête du CTO</li>
+        </ul>
+      </div>
+      <div class="card real">
+        <h3>Ce que Reprisa vous remet</h3>
+        <ul>
+          <li>Un test de restauration réel, avec durée et perte de données mesurées</li>
+          <li>Un exercice de sortie : export complet des données d'un client, vérifié</li>
+          <li>Le registre de vos sous-traitants cloud et de leurs localisations</li>
+          <li>Une procédure d'incident alignée sur les délais de vos clients</li>
+          <li>Un rapport daté, signé, à joindre aux questionnaires</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="diagnostic">
+    <h2 class="s">Diagnostic gratuit : êtes-vous prêt pour le questionnaire DORA de votre client ?</h2>
+    <p class="sub">Douze questions tirées des clauses que l'article 30 du règlement DORA impose dans les contrats avec les fournisseurs informatiques. Rien n'est envoyé, rien n'est enregistré.</p>
+    <div class="quiz" id="quiz"></div>
+    <div class="result" id="res" aria-live="polite"></div>
+  </section>
+
+  <section id="offre">
+    <h2 class="s">Le dossier de preuves, à prix fixe</h2>
+    <p class="sub">Un prix connu avant de commencer. Accès en lecture seule et environnement de test : rien n'est touché en production sans votre accord écrit. Valable AWS, GCP, Azure, OVHcloud, Scaleway, Kubernetes.</p>
+    <div class="offers">
+      <div class="offer">
+        <h3>Essentiel</h3>
+        <p class="price">2 900 € HT</p>
+        <ul>
+          <li>Test de restauration complet sur environnement isolé, RTO et RPO mesurés</li>
+          <li>Registre des sous-traitants cloud et localisations des données</li>
+          <li>Rapport de preuves daté</li>
+        </ul>
+      </div>
+      <div class="offer main">
+        <h3>Complet</h3>
+        <p class="price">4 900 € HT</p>
+        <ul>
+          <li>Tout l'Essentiel</li>
+          <li>Exercice de sortie : export complet et vérifié des données d'un client</li>
+          <li>Procédure d'incident et d'assistance au client, prête à signer</li>
+          <li>Réponses rédigées au questionnaire fournisseur de votre client</li>
+        </ul>
+      </div>
+      <div class="offer">
+        <h3>Re-test annuel</h3>
+        <p class="price">1 500 € HT <span>par an</span></p>
+        <ul>
+          <li>Les mêmes tests rejoués chaque année</li>
+          <li>Rapport mis à jour, écarts suivis</li>
+          <li>Ce que vos clients demandent au renouvellement</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="s">Comment ça se passe</h2>
+    <ol class="steps">
+      <li><strong>Semaine 1 : inventaire.</strong> Accès en lecture seule. Architecture, sauvegardes, sous-traitants, contrats types, questionnaire de votre client s'il existe.</li>
+      <li><strong>Semaine 2 : tests.</strong> Restauration complète sur un environnement isolé, export d'un jeu de données client, mesure des durées. Les écarts sont corrigés au fil de l'eau quand c'est possible.</li>
+      <li><strong>Semaine 3 : dossier.</strong> Rapport daté, registre, procédures, et réponses au questionnaire si vous avez pris l'offre Complet.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2 class="s">Si votre client conteste une preuve, on la refait</h2>
+    <div class="guarantee">
+      <p>Si, dans les six mois, l'un de vos clients financiers juge insuffisante une preuve couverte par le dossier, Reprisa refait le test ou complète le document sans frais. Reprisa réalise des tests techniques et rédige des preuves ; ce n'est ni un cabinet d'avocats ni un auditeur certifié, et le dossier ne vaut pas certification.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="s">Parler d'un dossier</h2>
+    <p class="sub">Réponse écrite sous un jour ouvré, avec un prix ferme. Aucun appel commercial non sollicité.</p>
+    <form id="f" method="POST" action="https://formspree.io/f/mzeejnkr">
+      <label for="email">E-mail professionnel</label>
+      <input id="email" name="email" type="email" required autocomplete="email">
+      <label for="societe">Entreprise</label>
+      <input id="societe" name="entreprise" type="text" required autocomplete="organization">
+      <label for="clients">Vos clients financiers</label>
+      <select id="clients" name="clients"><option>Banques</option><option>Assureurs ou mutuelles</option><option>Sociétés de gestion</option><option>Établissements de paiement</option><option>Plusieurs</option></select>
+      <label for="urg">Échéance</label>
+      <select id="urg" name="echeance"><option>Questionnaire reçu, à rendre</option><option>Renouvellement de contrat prochain</option><option>Appel d'offres en cours</option><option>Pas d'échéance précise</option></select>
+      <label for="msg">Votre situation (facultatif)</label>
+      <textarea id="msg" name="message" rows="3"></textarea>
+      <input type="hidden" name="score_diagnostic" id="scoreField" value="">
+      <input type="hidden" name="source" value="reprisa-v1">
+      <input type="hidden" name="_subject" value="Demande Reprisa (DORA)">
+      <button class="btn" type="submit">Envoyer</button>
+      <p class="fine">Vos informations servent uniquement à répondre à cette demande.</p>
+    </form>
+    <div class="thanks" id="t"><p><strong>Demande envoyée.</strong> Vous recevez une réponse écrite avec un prix ferme sous un jour ouvré.</p></div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <p>Reprisa — tests de résilience et dossiers de preuves pour les fournisseurs informatiques du secteur financier. Contact : amine@reprisa.fr. Références : règlement (UE) 2022/2554 (DORA), articles 28 à 30.</p>
+</div></footer>
+
+<script>
+(function(){
+  var Q=[
+    ["Vos contrats décrivent précisément les fonctions et services fournis, et les niveaux de service.","Description des services et SLA chiffrés","Article 30 : description complète des fonctions et des niveaux de service"],
+    ["Vous savez dire, par écrit, dans quels pays vos données et traitements sont hébergés, y compris chez vos sous-traitants.","Localisations des données et des traitements","Localisation des données et des traitements, y compris sous-traitance"],
+    ["Vous tenez un registre à jour de vos sous-traitants cloud et techniques.","Registre des sous-traitants","Chaîne de sous-traitance des fonctions critiques"],
+    ["Une restauration complète depuis vos sauvegardes a été réalisée et chronométrée au cours des 12 derniers mois.","Test de restauration daté","Disponibilité et intégrité des données, continuité"],
+    ["Vous connaissez votre durée de reprise (RTO) et votre perte de données maximale (RPO), mesurées et pas seulement promises.","RTO et RPO mesurés","Plans de continuité et leurs tests"],
+    ["Vous pouvez restituer l'intégralité des données d'un client dans un format exploitable, et vous l'avez déjà fait.","Restitution des données testée","Accès, récupération et restitution des données en cas d'arrêt ou de fin de contrat"],
+    ["Un plan de sortie (réversibilité) écrit existe, avec une période de transition prévue.","Plan de sortie et transition","Stratégies de sortie et période de transition obligatoire"],
+    ["Une procédure d'incident prévoit d'informer et d'assister votre client sans délai, à un coût fixé d'avance.","Assistance aux incidents","Assistance en cas d'incident, sans coût ou à coût prédéterminé"],
+    ["Vos clients peuvent exercer un droit d'audit et d'inspection, et vous savez comment l'organiser.","Droits d'audit","Droits d'accès, d'inspection et d'audit"],
+    ["Vous participez, ou pourriez participer, aux exercices de continuité et aux formations de sécurité de vos clients.","Participation aux tests et formations","Participation aux programmes de sensibilisation et aux tests du client"],
+    ["Vos accès d'administration sont nominatifs, journalisés et protégés par une authentification forte.","Sécurité des accès","Sécurité, authenticité et confidentialité des données"],
+    ["Vous avez déjà répondu à un questionnaire fournisseur DORA sans laisser de question en suspens.","Questionnaire DORA maîtrisé","Coopération avec l'établissement et ses autorités"]
+  ];
+  var quiz=document.getElementById('quiz'),res=document.getElementById('res'),ans={};
+  Q.forEach(function(q,i){
+    var d=document.createElement('div');d.className='q';
+    d.innerHTML='<p>'+q[0]+'<small>'+q[2]+'</small></p><div class="seg" role="group" aria-label="Réponse question '+(i+1)+'"><button type="button" class="y" data-v="2">Oui</button><button type="button" class="p" data-v="1">En partie</button><button type="button" class="n" data-v="0">Non</button></div>';
+    d.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){
+      d.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed','false')});
+      b.setAttribute('aria-pressed','true');ans[i]=+b.dataset.v;render();});});
+    quiz.appendChild(d);
+  });
+  function render(){
+    var n=Object.keys(ans).length;
+    if(n<Q.length){res.className='result';res.innerHTML='<p>Répondez aux '+Q.length+' questions pour voir votre résultat ('+n+' sur '+Q.length+').</p>';return;}
+    var s=0,miss=[],part=[];Q.forEach(function(q,i){s+=ans[i];if(ans[i]===0)miss.push(q[1]);if(ans[i]===1)part.push(q[1]);});
+    var pct=Math.round(s/(Q.length*2)*100),cls=pct<50?'bad':(pct<80?'mid':'good');
+    var head=pct<50?'Votre prochain questionnaire DORA va vous coûter cher':(pct<80?'Une base solide, des preuves manquantes':'Vous êtes bien préparé');
+    var html='<h3>'+head+'</h3><div class="score">'+pct+' %</div>';
+    if(miss.length)html+='<p><strong>Preuves absentes</strong> : ce que votre client risque de relever.</p><ul>'+miss.map(function(m){return '<li>'+m+'</li>'}).join('')+'</ul>';
+    if(part.length)html+='<p><strong>Preuves partielles</strong> : à dater ou à tester.</p><ul>'+part.map(function(m){return '<li>'+m+'</li>'}).join('')+'</ul>';
+    html+='<p style="margin-top:14px">'+(pct<80?'Le dossier Reprisa couvre ces points en trois semaines. <a href="#contact">Recevoir un prix ferme</a>.':'Pensez au re-test annuel : c’est ce que vos clients demandent au renouvellement.')+'</p>';
+    res.className='result '+cls;res.innerHTML=html;
+    document.getElementById('scoreField').value=pct+' % ; manquants : '+miss.join(', ');
+  }
+  render();
+  var f=document.getElementById('f'),t=document.getElementById('t');
+  f.addEventListener('submit',function(e){e.preventDefault();
+    fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}})
+    .then(function(r){if(r.ok){f.style.display='none';t.style.display='block';}else{alert("La demande n'est pas partie. Réessayez ou écrivez à amine@reprisa.fr.");}})
+    .catch(function(){alert("La demande n'est pas partie. Vérifiez votre connexion et réessayez.");});
+  });
+})();
+</script>
+</body>
+</html>
