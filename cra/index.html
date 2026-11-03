@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Reprisa — Cyber Resilience Act : SBOM, surveillance des failles et signalement sous 24 heures</title>
-<meta name="description" content="Fabricants de logiciels et d'objets connectés : depuis le 11 septembre 2026, le CRA impose de signaler les failles exploitées sous 24 heures. Pipeline SBOM, surveillance des vulnérabilités et procédure de signalement, à prix fixe.">
+<title>Cyber Resilience Act : SBOM et signalement en 24 heures</title>
+<meta name="description" content="CRA : depuis le 11 septembre 2026, signalez les failles exploitées sous 24 h. Pipeline SBOM, veille des vulnérabilités et procédure, dès 2 900 € HT.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
@@ -72,7 +72,27 @@
   .thanks{display:none;background:#fff;border:1px solid var(--rule);border-radius:6px;padding:26px;max-width:620px}
   footer{border-top:1px solid var(--rule);padding:30px 0 48px;color:var(--soft);font-size:14px}
   @media (max-width:860px){.split,.offers{grid-template-columns:1fr}.q{grid-template-columns:1fr}.btn.ghost{margin-left:0;margin-top:10px}.hero{padding:44px 0 36px}}
+
+  .faq{max-width:780px}
+  .faq details{border-bottom:1px solid var(--rule);padding:14px 0}
+  .faq summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-weight:400;font-size:22px;line-height:1}
+  .faq details[open] summary::after{content:"\2212"}
+  .faq details p{margin:10px 0 0;color:var(--ink-soft, var(--soft))}
 </style>
+<link rel="canonical" href="https://reprisa.fr/cra/">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Reprisa">
+<meta property="og:title" content="Cyber Resilience Act : SBOM et signalement en 24 heures">
+<meta property="og:description" content="CRA : depuis le 11 septembre 2026, signalez les failles exploitées sous 24 h. Pipeline SBOM, veille des vulnérabilités et procédure, dès 2 900 € HT.">
+<meta property="og:url" content="https://reprisa.fr/cra/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://reprisa.fr/#org", "name": "Reprisa", "url": "https://reprisa.fr/", "email": "amine@reprisa.fr", "logo": "https://reprisa.fr/favicon.svg", "founder": {"@type": "Person", "name": "Amine", "jobTitle": "Ingénieur DevOps"}}, {"@type": "WebPage", "@id": "https://reprisa.fr/cra/", "url": "https://reprisa.fr/cra/", "name": "Cyber Resilience Act : SBOM et signalement en 24 heures", "description": "CRA : depuis le 11 septembre 2026, signalez les failles exploitées sous 24 h. Pipeline SBOM, veille des vulnérabilités et procédure, dès 2 900 € HT.", "inLanguage": "fr-FR", "isPartOf": {"@type": "WebSite", "@id": "https://reprisa.fr/#site", "url": "https://reprisa.fr/", "name": "Reprisa", "inLanguage": "fr-FR", "publisher": {"@id": "https://reprisa.fr/#org"}}, "about": {"@id": "https://reprisa.fr/cra/#service"}}, {"@type": "Service", "@id": "https://reprisa.fr/cra/#service", "name": "Mise en conformité technique au Cyber Resilience Act", "serviceType": "Conformité Cyber Resilience Act", "provider": {"@id": "https://reprisa.fr/#org"}, "areaServed": {"@type": "Country", "name": "France"}, "url": "https://reprisa.fr/cra/", "offers": [{"@type": "Offer", "name": "Signalement", "price": "2900", "priceCurrency": "EUR", "priceSpecification": {"@type": "UnitPriceSpecification", "price": "2900", "priceCurrency": "EUR", "valueAddedTaxIncluded": false}, "url": "https://reprisa.fr/cra/#contact"}, {"@type": "Offer", "name": "Prêt pour 2027", "price": "5900", "priceCurrency": "EUR", "priceSpecification": {"@type": "UnitPriceSpecification", "price": "5900", "priceCurrency": "EUR", "valueAddedTaxIncluded": false}, "url": "https://reprisa.fr/cra/#contact"}, {"@type": "Offer", "name": "Veille mensuelle", "price": "290", "priceCurrency": "EUR", "priceSpecification": {"@type": "UnitPriceSpecification", "price": "290", "priceCurrency": "EUR", "valueAddedTaxIncluded": false}, "url": "https://reprisa.fr/cra/#contact"}]}, {"@type": "FAQPage", "@id": "https://reprisa.fr/cra/#faq", "mainEntity": [{"@type": "Question", "name": "Qui est concerné par le Cyber Resilience Act ?", "acceptedAnswer": {"@type": "Answer", "text": "Tout fabricant qui met sur le marché européen un produit comportant des éléments numériques : logiciel, application mobile ou de bureau, firmware, objet connecté, équipement réseau, y compris les produits déjà commercialisés pour les obligations de signalement."}}, {"@type": "Question", "name": "Quels sont les délais de signalement du CRA ?", "acceptedAnswer": {"@type": "Answer", "text": "Pour une vulnérabilité activement exploitée : alerte précoce sous 24 heures, notification sous 72 heures et rapport final au plus tard 14 jours après la mise à disposition d'un correctif, via la plateforme unique de l'ENISA."}}, {"@type": "Question", "name": "Le SBOM est-il obligatoire avec le CRA ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui, à partir du 11 décembre 2027 : le fabricant doit identifier et documenter les composants de son produit, notamment au moyen d'une nomenclature logicielle (SBOM) dans un format couramment utilisé et lisible par machine."}}, {"@type": "Question", "name": "Que se passe-t-il à partir du 11 décembre 2027 ?", "acceptedAnswer": {"@type": "Answer", "text": "Toutes les exigences essentielles s'appliquent : sécurité dès la conception, gestion des vulnérabilités, mises à jour de sécurité pendant la durée de support, documentation technique et marquage CE."}}]}]}</script>
 </head>
 <body>
 <header><div class="wrap">
@@ -169,6 +189,16 @@
     <h2 class="s">Ce que Reprisa n'est pas</h2>
     <div class="guarantee">
       <p>Reprisa met en place la chaîne technique et les procédures. Ce n'est ni un organisme notifié ni un cabinet d'avocats : pour les produits classés importants ou critiques, l'évaluation de conformité reste à faire avec l'organisme compétent, et le dossier préparé sert de base.</p>
+    </div>
+  </section>
+
+    <section class="faq-wrap" id="faq">
+    <h2 class="s">Questions fréquentes</h2>
+    <div class="faq">
+      <details><summary>Qui est concerné par le Cyber Resilience Act&nbsp;?</summary><p>Tout fabricant qui met sur le marché européen un produit comportant des éléments numériques&nbsp;: logiciel, application mobile ou de bureau, firmware, objet connecté, équipement réseau, y compris les produits déjà commercialisés pour les obligations de signalement.</p></details>
+      <details><summary>Quels sont les délais de signalement du CRA&nbsp;?</summary><p>Pour une vulnérabilité activement exploitée&nbsp;: alerte précoce sous 24 heures, notification sous 72 heures et rapport final au plus tard 14 jours après la mise à disposition d'un correctif, via la plateforme unique de l'ENISA.</p></details>
+      <details><summary>Le SBOM est-il obligatoire avec le CRA&nbsp;?</summary><p>Oui, à partir du 11 décembre 2027&nbsp;: le fabricant doit identifier et documenter les composants de son produit, notamment au moyen d'une nomenclature logicielle (SBOM) dans un format couramment utilisé et lisible par machine.</p></details>
+      <details><summary>Que se passe-t-il à partir du 11 décembre 2027&nbsp;?</summary><p>Toutes les exigences essentielles s'appliquent&nbsp;: sécurité dès la conception, gestion des vulnérabilités, mises à jour de sécurité pendant la durée de support, documentation technique et marquage CE.</p></details>
     </div>
   </section>
 
