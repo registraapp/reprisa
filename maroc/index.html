@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DORA et CRA pour ESN et éditeurs marocains | Reprisa</title>
+<meta name="description" content="ESN et éditeurs marocains : répondez aux questionnaires DORA et CRA de vos clients européens. Diagnostic écrit gratuit, dossier de preuves à prix fixe.">
+<link rel="canonical" href="https://reprisa.fr/maroc/">
+<link rel="alternate" hreflang="fr-MA" href="https://reprisa.fr/maroc/">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta property="og:type" content="website"><meta property="og:locale" content="fr_FR"><meta property="og:site_name" content="Reprisa">
+<meta property="og:title" content="DORA et CRA pour ESN et éditeurs marocains | Reprisa"><meta property="og:description" content="ESN et éditeurs marocains : répondez aux questionnaires DORA et CRA de vos clients européens. Diagnostic écrit gratuit, dossier de preuves à prix fixe."><meta property="og:url" content="https://reprisa.fr/maroc/">
+<meta name="twitter:card" content="summary"><meta name="theme-color" content="#ffffff">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F5F6F8;--ink:#13202E;--soft:#4F5D6C;--rule:#D2D8E0;--steel:#1F4E79;--steel-tint:#E3ECF5;--ok:#2D6A4F;--ok-tint:#E2F0E8;--warn:#8A5A00;--warn-tint:#F7EDD5;--bad:#9B2C2C;--bad-tint:#F6E1E1;--focus:#2C5FD9;--serif:"Newsreader",Georgia,serif;--sans:"Inter Tight",system-ui,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6}
+  :focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+  a{color:var(--ink)}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+  header .wrap{display:flex;justify-content:space-between;align-items:baseline;padding:24px 20px;border-bottom:1px solid var(--rule)}
+  .brand{font-family:var(--serif);font-weight:600;font-size:26px;text-decoration:none;letter-spacing:-.01em}
+  .brand small{font-family:var(--sans);font-weight:400;font-size:14px;color:var(--soft);margin-left:10px}
+  header nav a{font-weight:500;text-decoration:none;border-bottom:2px solid var(--steel);margin-left:18px}
+  .hero{padding:64px 0 48px;max-width:800px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(32px,4.8vw,50px);line-height:1.1;letter-spacing:-.015em;margin:0 0 20px}
+  .lede{font-size:19px;color:var(--soft);margin:0 0 28px;max-width:60ch}
+  .btn{display:inline-block;background:var(--steel);color:#fff;text-decoration:none;font-weight:600;padding:14px 22px;border-radius:4px;border:0;font:inherit;font-weight:600;cursor:pointer}
+  .btn:hover{background:#183d60}
+  .btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink);padding:12px 20px;margin-left:12px}
+  section{padding:56px 0;border-top:1px solid var(--rule)}
+  h2.s{font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.2;margin:0 0 10px}
+  .sub{color:var(--soft);max-width:64ch;margin:0 0 28px}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .card{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:24px}
+  .card h3{font-family:var(--serif);font-size:21px;margin:0 0 10px}
+  .card ul{padding-left:18px;margin:0}.card li{margin-bottom:7px}
+  .card.paper{background:#fbfbfb}
+  .card.real{border:2px solid var(--steel);background:var(--steel-tint)}
+  /* questionnaire */
+  .quiz{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:8px 24px 20px}
+  .q{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--rule)}
+  .q:last-of-type{border-bottom:0}
+  .q p{margin:0}.q small{display:block;color:var(--soft);font-size:13px;margin-top:2px}
+  .seg{display:inline-flex;border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+  .seg button{font:inherit;font-size:14px;border:0;background:#fff;padding:7px 12px;cursor:pointer;color:var(--ink);border-left:1px solid var(--rule)}
+  .seg button:first-child{border-left:0}
+  .seg button[aria-pressed="true"].y{background:var(--ok);color:#fff}
+  .seg button[aria-pressed="true"].p{background:var(--warn);color:#fff}
+  .seg button[aria-pressed="true"].n{background:var(--bad);color:#fff}
+  .result{margin-top:22px;border-radius:6px;padding:22px 24px;border:1px solid var(--rule);background:#fff}
+  .result.bad{background:var(--bad-tint);border-color:var(--bad)}
+  .result.mid{background:var(--warn-tint);border-color:var(--warn)}
+  .result.good{background:var(--ok-tint);border-color:var(--ok)}
+  .result h3{font-family:var(--serif);font-size:24px;margin:0 0 8px}
+  .result .score{font-size:40px;font-weight:600;font-variant-numeric:tabular-nums}
+  .result ul{margin:10px 0 0;padding-left:18px}
+  .offers{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+  .offer{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:24px}
+  .offer.main{border:2px solid var(--steel);background:var(--steel-tint)}
+  .offer h3{font-family:var(--serif);font-size:22px;margin:0 0 4px}
+  .offer .price{font-size:26px;font-weight:600;margin:6px 0 12px}
+  .offer .price span{font-size:15px;font-weight:400;color:var(--soft)}
+  .offer ul{padding-left:18px;margin:0}.offer li{margin-bottom:6px}
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:0;max-width:720px}
+  ol.steps li{counter-increment:s;position:relative;padding:0 0 22px 52px}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:34px;height:34px;border-radius:50%;border:2px solid var(--steel);display:grid;place-items:center;font-weight:600;color:var(--steel)}
+  ol.steps strong{display:block}
+  .guarantee{background:#fff;border-left:5px solid var(--steel);padding:22px 26px;max-width:760px;border-radius:0 6px 6px 0}
+  .guarantee p{margin:0}
+  form{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:26px;max-width:620px}
+  label{display:block;font-weight:500;margin-bottom:6px}
+  input,select,textarea{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:1px solid #B5BFCC;border-radius:4px;background:#fff;color:var(--ink);margin-bottom:16px}
+  .fine{font-size:14px;color:var(--soft)}
+  .thanks{display:none;background:#fff;border:1px solid var(--rule);border-radius:6px;padding:26px;max-width:620px}
+  footer{border-top:1px solid var(--rule);padding:30px 0 48px;color:var(--soft);font-size:14px}
+  @media (max-width:860px){.split,.offers{grid-template-columns:1fr}.q{grid-template-columns:1fr}.btn.ghost{margin-left:0;margin-top:10px}.hero{padding:44px 0 36px}}
+
+  .faq{max-width:780px}
+  .faq details{border-bottom:1px solid var(--rule);padding:14px 0}
+  .faq summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-weight:400;font-size:22px;line-height:1}
+  .faq details[open] summary::after{content:"\2212"}
+  .faq details p{margin:10px 0 0;color:var(--ink-soft, var(--soft))}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://reprisa.fr/#org", "name": "Reprisa", "url": "https://reprisa.fr/", "email": "amine@reprisa.fr", "logo": "https://reprisa.fr/favicon.svg", "founder": {"@type": "Person", "name": "Amine", "jobTitle": "Ingénieur DevOps"}}, {"@type": "WebPage", "@id": "https://reprisa.fr/maroc/", "url": "https://reprisa.fr/maroc/", "name": "DORA et CRA pour ESN et éditeurs marocains | Reprisa", "description": "ESN et éditeurs marocains : répondez aux questionnaires DORA et CRA de vos clients européens. Diagnostic écrit gratuit, dossier de preuves à prix fixe.", "inLanguage": "fr-FR", "isPartOf": {"@type": "WebSite", "@id": "https://reprisa.fr/#site", "url": "https://reprisa.fr/", "name": "Reprisa"}, "about": {"@id": "https://reprisa.fr/maroc/#service"}}, {"@type": "Service", "@id": "https://reprisa.fr/maroc/#service", "name": "Réponse aux questionnaires DORA et CRA pour prestataires marocains", "serviceType": "Conformité DORA et Cyber Resilience Act", "provider": {"@id": "https://reprisa.fr/#org"}, "areaServed": {"@type": "Country", "name": "Maroc"}, "url": "https://reprisa.fr/maroc/", "offers": [{"@type": "Offer", "name": "Diagnostic écrit", "price": "0", "priceCurrency": "EUR", "url": "https://reprisa.fr/maroc/#contact"}, {"@type": "Offer", "name": "Réponse au questionnaire", "price": "1900", "priceCurrency": "EUR", "url": "https://reprisa.fr/maroc/#contact"}, {"@type": "Offer", "name": "Dossier de preuves", "price": "3500", "priceCurrency": "EUR", "url": "https://reprisa.fr/maroc/#contact"}, {"@type": "Offer", "name": "Pipeline CRA", "price": "2900", "priceCurrency": "EUR", "url": "https://reprisa.fr/maroc/#contact"}]}, {"@type": "FAQPage", "@id": "https://reprisa.fr/maroc/#faq", "mainEntity": [{"@type": "Question", "name": "Une ESN marocaine est-elle concernée par DORA ?", "acceptedAnswer": {"@type": "Answer", "text": "Pas directement : DORA s'applique aux établissements financiers européens. Mais l'article 29 leur impose d'évaluer avec une attention particulière les prestataires informatiques établis hors de l'Union, et l'article 30 fixe les clauses de leurs contrats. Une ESN marocaine qui travaille pour une banque ou un assureur européen reçoit donc un questionnaire et doit fournir des preuves."}}, {"@type": "Question", "name": "Que demandent les clients européens à un sous-traitant situé au Maroc ?", "acceptedAnswer": {"@type": "Answer", "text": "Le plus souvent : où sont traitées les données et d'où se font les accès, la liste des sous-traitants, le plan de continuité et la date de son dernier test, la capacité à restituer les données en fin de contrat, la procédure d'incident, les droits d'audit et le cadre des transferts de données personnelles."}}, {"@type": "Question", "name": "Un éditeur de logiciel marocain doit-il respecter le Cyber Resilience Act ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui, s'il met son logiciel à disposition sur le marché européen. Depuis le 11 septembre 2026, les vulnérabilités activement exploitées doivent être signalées sous 24 heures via la plateforme de l'ENISA ; le reste des obligations s'applique le 11 décembre 2027. Un fabricant établi hors de l'Union peut désigner un mandataire dans l'Union ; à défaut, l'importateur assume une partie des vérifications."}}, {"@type": "Question", "name": "Comment se passe le diagnostic gratuit ?", "acceptedAnswer": {"@type": "Answer", "text": "Vous envoyez le questionnaire reçu de votre client (ou ses principales questions). Vous recevez sous cinq jours ouvrés une note écrite : les réponses que vous pouvez déjà apporter, les preuves qui manquent et le travail nécessaire pour les produire. Aucun engagement."}}, {"@type": "Question", "name": "Le travail peut-il se faire à distance ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui, entièrement : accès en lecture seule à votre documentation et à vos environnements de test, échanges en français, fuseau horaire proche de celui de la France."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://reprisa.fr/"}, {"@type": "ListItem", "position": 2, "name": "Prestataires marocains", "item": "https://reprisa.fr/maroc/"}]}]}</script>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="brand" href="/">Reprisa<small>prestataires marocains</small></a>
+  <nav><a href="#diagnostic">Diagnostic gratuit</a><a href="#contact">Nous écrire</a></nav>
+</div></header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Votre client européen vous envoie un questionnaire DORA. Il attend des preuves, pas des promesses.</h1>
+    <p class="lede">Banques, assureurs et sociétés de gestion européens doivent évaluer de près leurs prestataires informatiques situés hors de l'Union&nbsp;: localisation des données et des accès, sous-traitants, plan de continuité testé, plan de sortie, droits d'audit. Pour une ESN ou un éditeur marocain, c'est désormais une étape de chaque appel d'offres et de chaque renouvellement. Reprisa vous aide à répondre juste, avec des preuves.</p>
+    <a class="btn" href="#diagnostic">Diagnostic écrit gratuit</a>
+    <a class="btn ghost" href="#offre">Voir les formules</a>
+  </div>
+
+  <section>
+    <h2 class="s">Ce que vos clients européens vous demandent maintenant</h2>
+    <p class="sub">Deux textes européens se répercutent directement sur les prestataires marocains.</p>
+    <div class="split">
+      <div class="card">
+        <h3>DORA, pour vos clients financiers</h3>
+        <ul>
+          <li>Évaluation renforcée des prestataires établis hors de l'Union (article 29)</li>
+          <li>Clauses imposées&nbsp;: localisation des données, niveaux de service, assistance aux incidents, audits, sortie (article 30)</li>
+          <li>Plan de continuité et restitution des données à démontrer, pas seulement à décrire</li>
+          <li>Transferts de données personnelles hors UE à encadrer</li>
+        </ul>
+      </div>
+      <div class="card real">
+        <h3>Le Cyber Resilience Act, pour vos logiciels</h3>
+        <ul>
+          <li>Signalement des failles activement exploitées sous 24&nbsp;heures depuis le 11 septembre 2026</li>
+          <li>Nomenclature des composants (SBOM) et gestion des vulnérabilités au 11 décembre 2027</li>
+          <li>Mises à jour de sécurité pendant toute la durée de support</li>
+          <li>Rôle de l'importateur ou d'un mandataire dans l'Union pour un fabricant établi hors UE</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="diagnostic">
+    <h2 class="s">Le diagnostic écrit, gratuit</h2>
+    <div class="guarantee">
+      <p>Envoyez-nous le questionnaire reçu de votre client, ou ses principales questions. Sous cinq jours ouvrés, vous recevez une note écrite&nbsp;: ce que vous pouvez déjà répondre, les preuves qui manquent, le travail nécessaire pour les produire et son prix. Aucun engagement, et votre questionnaire reste confidentiel.</p>
+    </div>
+  </section>
+
+  <section id="offre">
+    <h2 class="s">Trois formules à prix fixe</h2>
+    <p class="sub">Travail entièrement à distance, en français. Accès en lecture seule et environnements de test&nbsp;: rien n'est touché en production.</p>
+    <div class="offers">
+      <div class="offer">
+        <h3>Réponse au questionnaire</h3>
+        <p class="price">1 900 € HT</p>
+        <ul>
+          <li>Réponses rédigées, question par question</li>
+          <li>Registre des sous-traitants et localisation des données et des accès</li>
+          <li>Procédure d'incident et d'assistance au client</li>
+        </ul>
+      </div>
+      <div class="offer main">
+        <h3>Dossier de preuves</h3>
+        <p class="price">3 500 € HT</p>
+        <ul>
+          <li>Tout le questionnaire</li>
+          <li>Test de restauration réel, durée et perte de données mesurées</li>
+          <li>Exercice de sortie&nbsp;: export complet des données d'un client</li>
+          <li>Rapport daté, réutilisable pour vos autres clients</li>
+        </ul>
+      </div>
+      <div class="offer">
+        <h3>Pipeline CRA</h3>
+        <p class="price">2 900 € HT <span>par produit</span></p>
+        <ul>
+          <li>SBOM généré à chaque build</li>
+          <li>Surveillance des failles des dépendances</li>
+          <li>Procédure de signalement 24 h / 72 h / 14 jours</li>
+        </ul>
+      </div>
+    </div>
+    <p class="fine" style="margin-top:14px">Pour les clauses contractuelles et les transferts de données personnelles, le dossier technique sert de base à votre juriste&nbsp;: Reprisa n'est pas un cabinet d'avocats. Voir aussi l'offre <a href="/">DORA</a> et l'offre <a href="/cra/">Cyber Resilience Act</a>.</p>
+  </section>
+
+  <section class="faq-wrap" id="faq">
+    <h2 class="s">Questions fréquentes</h2>
+    <div class="faq">
+      <details><summary>Une ESN marocaine est-elle concernée par DORA&nbsp;?</summary><p>Pas directement&nbsp;: DORA s'applique aux établissements financiers européens. Mais l'article 29 leur impose d'évaluer avec une attention particulière les prestataires informatiques établis hors de l'Union, et l'article 30 fixe les clauses de leurs contrats. Une ESN marocaine qui travaille pour une banque ou un assureur européen reçoit donc un questionnaire et doit fournir des preuves.</p></details>
+      <details><summary>Que demandent les clients européens à un sous-traitant situé au Maroc&nbsp;?</summary><p>Le plus souvent&nbsp;: où sont traitées les données et d'où se font les accès, la liste des sous-traitants, le plan de continuité et la date de son dernier test, la capacité à restituer les données en fin de contrat, la procédure d'incident, les droits d'audit et le cadre des transferts de données personnelles.</p></details>
+      <details><summary>Un éditeur de logiciel marocain doit-il respecter le Cyber Resilience Act&nbsp;?</summary><p>Oui, s'il met son logiciel à disposition sur le marché européen. Depuis le 11 septembre 2026, les vulnérabilités activement exploitées doivent être signalées sous 24 heures via la plateforme de l'ENISA&nbsp;; le reste des obligations s'applique le 11 décembre 2027. Un fabricant établi hors de l'Union peut désigner un mandataire dans l'Union&nbsp;; à défaut, l'importateur assume une partie des vérifications.</p></details>
+      <details><summary>Comment se passe le diagnostic gratuit&nbsp;?</summary><p>Vous envoyez le questionnaire reçu de votre client (ou ses principales questions). Vous recevez sous cinq jours ouvrés une note écrite&nbsp;: les réponses que vous pouvez déjà apporter, les preuves qui manquent et le travail nécessaire pour les produire. Aucun engagement.</p></details>
+      <details><summary>Le travail peut-il se faire à distance&nbsp;?</summary><p>Oui, entièrement&nbsp;: accès en lecture seule à votre documentation et à vos environnements de test, échanges en français, fuseau horaire proche de celui de la France.</p></details>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="s">Nous écrire</h2>
+    <p class="sub">Réponse écrite sous un jour ouvré.</p>
+    <form id="f" method="POST" action="https://formspree.io/f/mzeejnkr">
+      <label for="email">E-mail professionnel</label>
+      <input id="email" name="email" type="email" required autocomplete="email">
+      <label for="societe">Entreprise</label>
+      <input id="societe" name="entreprise" type="text" required autocomplete="organization">
+      <label for="type">Vous êtes</label>
+      <select id="type" name="type"><option>ESN ou centre de services</option><option>Éditeur de logiciel</option><option>Les deux</option></select>
+      <label for="besoin">Votre besoin</label>
+      <select id="besoin" name="besoin"><option>Questionnaire DORA reçu d'un client</option><option>Appel d'offres d'une banque ou d'un assureur</option><option>Cyber Resilience Act pour un logiciel</option><option>Autre</option></select>
+      <label for="msg">Votre situation (facultatif)</label>
+      <textarea id="msg" name="message" rows="3"></textarea>
+      <input type="hidden" name="source" value="reprisa-maroc-v1">
+      <input type="hidden" name="_subject" value="Demande Reprisa (Maroc)">
+      <button class="btn" type="submit">Envoyer</button>
+      <p class="fine">Vos informations servent uniquement à répondre à cette demande.</p>
+    </form>
+    <div class="thanks" id="t"><p><strong>Demande envoyée.</strong> Vous recevez une réponse écrite sous un jour ouvré.</p></div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <p>Reprisa — <a href="/">preuves de résilience DORA</a>, <a href="/cra/">Cyber Resilience Act</a> et accompagnement des prestataires marocains. Contact : amine@reprisa.fr.</p>
+  <p><a href="/blog/"><strong>Guides</strong></a> : <a href="/blog/questionnaire-dora-fournisseur/">Questionnaire DORA fournisseur</a> · <a href="/blog/plan-de-sortie-reversibilite-dora/">Plan de sortie DORA</a> · <a href="/blog/cra-signalement-vulnerabilite-24-heures/">Signalement CRA en 24 heures</a></p>
+</div></footer>
+<script>
+(function(){var f=document.getElementById('f'),t=document.getElementById('t');
+f.addEventListener('submit',function(e){e.preventDefault();fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}}).then(function(r){if(r.ok){f.style.display='none';t.style.display='block';}else{alert("La demande n'est pas partie. Écrivez à amine@reprisa.fr.");}}).catch(function(){alert("La demande n'est pas partie. Vérifiez votre connexion.");});});})();
+</script>
+</body>
+</html>
